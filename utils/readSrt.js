@@ -1,7 +1,9 @@
 const parser = require('subtitles-parser')
 const fs = require('fs')
+const { sanitizer } = require('./text-funcs')
 
 function readSrt(path, options) {
+  console.log({ path })
   if (!fs.existsSync(path)) throw new Error('File not found')
   if (!path.endsWith('.srt')) {
     const allFiles = fs.readdirSync(path)
@@ -17,8 +19,9 @@ function readSrt(path, options) {
   const subtitles = parser.fromSrt(srt, true)
   return subtitles.map(v => ({
     ...v,
-    startTime: v.startTime / 1000,
-    endTime: v.endTime / 1000,
+    text: sanitizer(v.text),
+    startTime: options?.ms ? v.startTime : v.startTime / 1000,
+    endTime: options?.ms ? v.endTime : v.endTime / 1000,
   }))
 }
 

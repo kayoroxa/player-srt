@@ -1,32 +1,48 @@
 const convertTimeStr = require('./convertHHMMSS')
 const readSrt = require('./readSrt')
+const parse = require('subtitles-parser')
 const { path } = require('../config-player.json')
+const pathJoin = require('path').join
 const fs = require('fs')
 
 const time = '7:10 - 8:20'
 
 const timeSplit = time.split(' - ')
 
-const start = convertTimeStr(timeSplit[0])
-const end = convertTimeStr(timeSplit[1])
+const start = convertTimeStr(timeSplit[0]) * 1000
+const end = convertTimeStr(timeSplit[1]) * 1000
 
 console.log(end)
 
-const srtDataEn = readSrt(path).filter(
+const srtDataEn = readSrt(path, { ms: true }).filter(
   v => v.startTime >= start && v.endTime <= end
 )
 
-const textSrtEn = srtDataEn.map(v => v.text)
+const textSrtEn = srtDataEn
+  .map(v => v.text.replace(/\n/g, ' \\n '))
 
-console.log(srtDataEn)
+  .join('\n')
+
+console.log(textSrtEn)
 
 // return
 
-// const fileTranslation = fs.readFileSync('./pt.txt', 'utf8').split('\r\n')
+const fileTranslation = fs
+  .readFileSync(pathJoin(path, './portuguese.srt'), 'utf8')
+  .replace(/\s\\ n\s/g, '\n')
+  .replace(/\s\\n\s/g, '\n')
+  .split('\r\n')
 
-// const srtPtGenerated = srtDataEn.map(v => ({
-//   ...v,
-//   text: fileTranslation[v.index],
-// }))
+// console.log(fileTranslation)
 
-// console.log(srtPtGenerated)
+const srtPtGenerated = srtDataEn.map((v, i) => ({
+  ...v,
+  text: fileTranslation[i],
+}))
+
+console.log(srtPtGenerated)
+
+fs.writeFileSync(
+  pathJoin(path, './portuguese.srt'),
+  parse.toSrt(srtPtGenerated)
+)

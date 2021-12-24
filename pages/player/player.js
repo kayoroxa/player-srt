@@ -3,7 +3,8 @@ const parse = require('subtitles-parser')
 const pathJoin = require('path').join
 const config = require('../../config-player.json')
 const pathMovie = config.path
-
+const { textToInner, sanitizer } = require('../../utils/text-funcs')
+const readSrt = require('../../utils/readSrt')
 const subEn = document.querySelector('p.en')
 const subPt = document.querySelector('p.pt')
 
@@ -27,22 +28,21 @@ function handleTimeUpdate(event) {
 
   // console.log({ currentSubtitle, currentTimeMs })
   if (currentSubtitleEn) {
-    subEn.textContent = currentSubtitleEn.text
+    subEn.innerHTML = textToInner(currentSubtitleEn.text)
   } else {
-    subEn.textContent = ''
+    subEn.innerHTML = ''
   }
   if (currentSubtitlePt) {
-    subPt.textContent = currentSubtitlePt.text
+    subPt.innerHTML = textToInner(currentSubtitlePt.text)
   } else {
-    subPt.textContent = ''
+    subPt.innerHTML = ''
   }
 }
 //find file mp4
-function findFindPath(type, containsFile = '') {
+function findFindPath(type, options) {
   const files = fs.readdirSync(pathMovie)
   let file
-  debugger
-  if (containsFile == '') {
+  if (!options?.pt) {
     file = files.find(
       file =>
         file.endsWith('.' + type) &&
@@ -51,7 +51,9 @@ function findFindPath(type, containsFile = '') {
     )
   } else {
     file = files.find(
-      file => file.endsWith('.' + type) && file.includes(containsFile)
+      file =>
+        file.endsWith('.' + type) &&
+        (file.includes('port') || file.includes('pt'))
     )
   }
   if (!file) {
@@ -63,28 +65,20 @@ function findFindPath(type, containsFile = '') {
 
 async function main() {
   const pathSrtEn = findFindPath('srt')
-  const pathSrtPt = findFindPath('srt', 'pt')
+  const pathSrtPt = findFindPath('srt', { pt: true })
   console.log({ pathSrtEn, pathSrtPt })
 
   if (!pathSrtEn) return
 
-  const srtFileEn = fs.readFileSync(pathSrtEn, 'utf8')
-
-  subtitlesDataEn = parse.fromSrt(srtFileEn, true).map(sub => ({
-    ...sub,
-    startTime: sub.startTime / 1000,
-    endTime: sub.endTime / 1000,
-  }))
+  subtitlesDataEn = readSrt(pathSrtEn)
   console.log({ subtitlesDataEn })
 
-  if (!pathSrtPt) return
-  const srtFilePt = fs.readFileSync(pathSrtPt, 'utf-8')
+  debugger
 
-  subtitlesDataPt = parse.fromSrt(srtFilePt, true).map(sub => ({
-    ...sub,
-    startTime: sub.startTime / 1000,
-    endTime: sub.endTime / 1000,
-  }))
+  if (!pathSrtPt) return
+
+  subtitlesDataPt = readSrt(pathSrtPt)
+  console.log({ subtitlesDataPt })
 }
 
 main()

@@ -35,12 +35,12 @@ video::-webkit-media-controls-fullscreen-button {
   text-align: center;
 }
 p.en {
-  font-size: 50px;
+  font-size: 3vw;
   font-weight: bold;
   color: white;
 }
 p.pt {
-  font-size: 40px;
+  font-size: 2.5vw;
   color: rgb(199, 199, 199);
 }
 .time {
