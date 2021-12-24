@@ -1,5 +1,4 @@
 function textToInner(text) {
-  console.log({ text, len: text.length })
   if (text.length > 72) {
     return text.replace(/\n/g, '<br>')
   } else {
@@ -14,6 +13,7 @@ function sanitizer(text) {
     .replace(/\[.*\]/g, '')
     .replace(/-/g, '')
     .replace(/\s\s+/g, ' ')
+    .replace(/^.*?:/g, '')
     .trim()
 }
 

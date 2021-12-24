@@ -6,6 +6,7 @@ const { textToInner } = require('../../utils/text-funcs')
 const readSrt = require('../../utils/readSrt')
 const subEn = document.querySelector('p.en')
 const subPt = document.querySelector('p.pt')
+const convertTimeStr = require('../../utils/convertHHMMSS')
 
 let subtitlesDataEn
 let subtitlesDataPt
@@ -65,17 +66,14 @@ function findFindPath(type, options) {
 async function main() {
   const pathSrtEn = findFindPath('srt')
   const pathSrtPt = findFindPath('srt', { pt: true })
-  console.log({ pathSrtEn, pathSrtPt })
 
   if (!pathSrtEn) return
 
   subtitlesDataEn = readSrt(pathSrtEn)
-  console.log({ subtitlesDataEn })
 
   if (!pathSrtPt) return
 
   subtitlesDataPt = readSrt(pathSrtPt)
-  console.log({ subtitlesDataPt })
 }
 
 main()
@@ -87,7 +85,7 @@ document.querySelector('video').src = findFindPath('mp4')
 // })
 
 if (config.start) {
-  document.querySelector('video').currentTime = config.start
+  document.querySelector('video').currentTime = convertTimeStr(config.start)
 }
 document.querySelector('video').src = findFindPath('mp4')
 document.querySelector('video').addEventListener('timeupdate', handleTimeUpdate)

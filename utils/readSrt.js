@@ -3,7 +3,6 @@ const fs = require('fs')
 const { sanitizer } = require('./text-funcs')
 
 function readSrt(path, options) {
-  console.log({ path })
   if (!fs.existsSync(path)) throw new Error('File not found')
   if (!path.endsWith('.srt')) {
     const allFiles = fs.readdirSync(path)

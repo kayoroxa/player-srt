@@ -5,14 +5,12 @@ const { path } = require('../config-player.json')
 const pathJoin = require('path').join
 const fs = require('fs')
 
-const time = '7:10 - 8:20'
+// const time = ['0:27:12', '0:31:7']
 
-const timeSplit = time.split(' - ')
+const timeSplit = ['1:22:59', '1:24:0'] // time.split(' - ')
 
 const start = convertTimeStr(timeSplit[0]) * 1000
 const end = convertTimeStr(timeSplit[1]) * 1000
-
-console.log(end)
 
 const srtDataEn = readSrt(path, { ms: true }).filter(
   v => v.startTime >= start && v.endTime <= end
@@ -24,7 +22,6 @@ const textSrtEn = srtDataEn
   .join('\n')
 
 console.log(textSrtEn)
-
 // return
 
 const fileTranslation = fs
@@ -39,8 +36,6 @@ const srtPtGenerated = srtDataEn.map((v, i) => ({
   ...v,
   text: fileTranslation[i],
 }))
-
-console.log(srtPtGenerated)
 
 fs.writeFileSync(
   pathJoin(path, './portuguese.srt'),
