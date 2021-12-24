@@ -1,9 +1,8 @@
 const fs = require('fs')
-const parse = require('subtitles-parser')
 const pathJoin = require('path').join
 const config = require('../../config-player.json')
 const pathMovie = config.path
-const { textToInner, sanitizer } = require('../../utils/text-funcs')
+const { textToInner } = require('../../utils/text-funcs')
 const readSrt = require('../../utils/readSrt')
 const subEn = document.querySelector('p.en')
 const subPt = document.querySelector('p.pt')
@@ -16,7 +15,7 @@ function handleTimeUpdate(event) {
     return (subEn.textContent = 'sem srt')
 
   const currentTimeMs = event.target.currentTime
-  debugger
+
   const currentSubtitleEn = subtitlesDataEn?.find(sub => {
     return sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs
   })
@@ -72,8 +71,6 @@ async function main() {
 
   subtitlesDataEn = readSrt(pathSrtEn)
   console.log({ subtitlesDataEn })
-
-  debugger
 
   if (!pathSrtPt) return
 
