@@ -10,6 +10,8 @@ const convertTimeStr = require('../../utils/convertHHMMSS')
 
 let subtitlesDataEn
 let subtitlesDataPt
+var indexSub = 0
+var lastSubtitleEn = false
 
 function handleTimeUpdate(event) {
   if (!subtitlesDataEn || subtitlesDataEn.length < 2)
@@ -24,7 +26,17 @@ function handleTimeUpdate(event) {
   const currentSubtitlePt = subtitlesDataPt?.find(sub => {
     return sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs
   })
+
+  lastSubtitleEn = currentSubtitleEn || lastSubtitleEn
   // debugger
+
+  //get index of subtitle more closer to current time
+  indexSub = subtitlesDataEn.reduce((acc, sub, i) => {
+    if (sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs) {
+      return i
+    } else if (sub.startTime <= currentTimeMs) return i + 1
+    return acc
+  }, -1)
 
   // console.log({ currentSubtitle, currentTimeMs })
   if (currentSubtitleEn) {

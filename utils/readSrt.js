@@ -16,12 +16,14 @@ function readSrt(path, options) {
   }
   const srt = fs.readFileSync(path, 'utf8')
   const subtitles = parser.fromSrt(srt, true)
-  return subtitles.map(v => ({
-    ...v,
-    text: sanitizer(v.text),
-    startTime: options?.ms ? v.startTime : v.startTime / 1000,
-    endTime: options?.ms ? v.endTime : v.endTime / 1000,
-  }))
+  return subtitles
+    .map(v => ({
+      ...v,
+      text: sanitizer(v.text),
+      startTime: options?.ms ? v.startTime : v.startTime / 1000,
+      endTime: options?.ms ? v.endTime : v.endTime / 1000,
+    }))
+    .filter(v => v.text.length > 0)
 }
 
 module.exports = readSrt

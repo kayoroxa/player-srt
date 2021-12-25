@@ -49,7 +49,7 @@ function fixSincronize(enData, ptData) {
   fixSplitEn.forEach((_, i) => {
     // console.log(fixSplitEn[i][0])
     // console.log(fixSplitPt[i][0])
-    console.log('\n')
+    // console.log('\n')
   })
 
   return {

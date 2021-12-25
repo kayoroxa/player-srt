@@ -10,16 +10,24 @@ let canStop = true
 
 document.addEventListener('keydown', e => {
   // console.log(times)
-  if (e.key === 'd' && indexTime < times.length - 1) {
-    indexTime++
-    video.currentTime = convertTimeStr(times[indexTime][0])
-    video.play()
-    canStop = true
-  } else if (e.key === 'a' && indexTime > 0) {
-    indexTime--
-    video.currentTime = convertTimeStr(times[indexTime][0])
-    video.play()
-    canStop = true
+  // if (e.key === 'd' && indexTime < times.length - 1) {
+  //   indexTime++
+  //   video.currentTime = convertTimeStr(times[indexTime][0])
+  //   video.play()
+  //   canStop = true
+  // } else if (e.key === 'a' && indexTime > 0) {
+  //   indexTime--
+  //   video.currentTime = convertTimeStr(times[indexTime][0])
+  //   video.play()
+  //   canStop = true
+  // }
+  if (e.key === 'd') {
+    video.currentTime = subtitlesDataEn[indexSub + 1].startTime
+  } else if (e.key === 'a') {
+    console.log(subtitlesDataEn[indexSub - 1])
+    video.currentTime = subtitlesDataEn[indexSub - 1].startTime
+  } else if (e.key === 's') {
+    video.currentTime = lastSubtitleEn.startTime
   }
 })
 
