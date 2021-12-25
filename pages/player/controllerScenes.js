@@ -9,18 +9,18 @@ video.currentTime = convertTimeStr(times[indexTime][0])
 let canStop = true
 
 document.addEventListener('keydown', e => {
-  // console.log(times)
-  // if (e.key === 'd' && indexTime < times.length - 1) {
-  //   indexTime++
-  //   video.currentTime = convertTimeStr(times[indexTime][0])
-  //   video.play()
-  //   canStop = true
-  // } else if (e.key === 'a' && indexTime > 0) {
-  //   indexTime--
-  //   video.currentTime = convertTimeStr(times[indexTime][0])
-  //   video.play()
-  //   canStop = true
-  // }
+  console.log(e.key)
+  if (e.key === 'PageUp' && indexTime < times.length - 1) {
+    indexTime++
+    video.currentTime = convertTimeStr(times[indexTime][0])
+    video.play()
+    canStop = true
+  } else if (e.key === 'PageDown' && indexTime > 0) {
+    indexTime--
+    video.currentTime = convertTimeStr(times[indexTime][0])
+    video.play()
+    canStop = true
+  }
   if (e.key === 'd') {
     video.currentTime = subtitlesDataEn[indexSub + 1].startTime
   } else if (e.key === 'a') {
