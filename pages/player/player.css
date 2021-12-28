@@ -11,6 +11,10 @@
   /* overflow: hidden; */
 }
 
+span.teach {
+  color: rgba(0, 166, 255, 0.926);
+}
+
 video {
   width: 100%;
   height: 100%;
@@ -33,7 +37,9 @@ video::-webkit-media-controls-fullscreen-button {
 
 .subtitles > * {
   text-align: center;
+  text-shadow: 3px 3px 1px #000000;
 }
+
 p.en {
   font-size: 3vw;
   font-weight: bold;
