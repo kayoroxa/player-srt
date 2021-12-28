@@ -1,9 +1,25 @@
+const { teaches } = require('../config-player')
+
+function colorTeach(text) {
+  const innerText = teaches.reduce((acc, teach) => {
+    if (teach.length < 1) return acc
+    return acc.replace(
+      new RegExp(teach, 'gi'),
+      `<span class="teach">${teach}</span>`
+    )
+  }, text)
+
+  return innerText
+}
+
 function textToInner(text) {
   if (text.length > 72) {
-    return text.replace(/\n/g, '<br>')
+    text = text.replace(/\n/g, '<br>')
   } else {
-    return text.replace(/\n/g, ' ')
+    text = text.replace(/\n/g, ' ')
   }
+  text = colorTeach(text)
+  return text
 }
 
 function sanitizer(text) {

@@ -1,7 +1,7 @@
 const convertTimeStr = require('./convertHHMMSS')
 const readSrt = require('./readSrt')
 const parse = require('subtitles-parser')
-const { path } = require('../config-player.json')
+const { path } = require('../config-player')
 const pathJoin = require('path').join
 const fs = require('fs')
 
