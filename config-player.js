@@ -1,4 +1,6 @@
 module.exports = {
+  folderMovies: 'F:/movies',
+  findTeach: 'have a nice',
   start: '0:0:0',
   times: [
     ['1:6:11', '1:6:59'],

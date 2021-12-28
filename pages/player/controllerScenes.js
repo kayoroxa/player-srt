@@ -32,6 +32,7 @@ document.addEventListener('keydown', e => {
     video.currentTime = lastSubtitleEn.startTime
   }
   if (e.key === ' ') {
+    e.preventDefault()
     if (video.paused) {
       video.play()
     } else {
