@@ -1,9 +1,12 @@
-const { times, timesEnd } = require('../../config-player.json')
+const { times, timesEnd } = require('../../config-player')
 const video = document.querySelector('video')
 // const convertTimeStr = require('../../utils/convertHHMMSS')
 //on key down change video current time
 
+const convertTimeStr = require('../../utils/convertHHMMSS')
+
 let indexTime = 0
+// video = document.querySelector('video')
 video.currentTime = convertTimeStr(times[indexTime][0])
 
 let canStop = true
@@ -24,10 +27,16 @@ document.addEventListener('keydown', e => {
   if (e.key === 'd') {
     video.currentTime = subtitlesDataEn[indexSub + 1].startTime
   } else if (e.key === 'a') {
-    console.log(subtitlesDataEn[indexSub - 1])
     video.currentTime = subtitlesDataEn[indexSub - 1].startTime
   } else if (e.key === 's') {
     video.currentTime = lastSubtitleEn.startTime
+  }
+  if (e.key === ' ') {
+    if (video.paused) {
+      video.play()
+    } else {
+      video.pause()
+    }
   }
 })
 
