@@ -4,6 +4,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  background-color: #000000;
+}
+
 .player {
   position: relative;
   width: 100vw;
@@ -28,6 +32,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 .subtitles {
+  transition: all 0.5s;
   z-index: 2;
   position: absolute;
   bottom: 90px;
@@ -38,6 +43,20 @@ video::-webkit-media-controls-fullscreen-button {
 .subtitles > * {
   text-align: center;
   text-shadow: 3px 3px 1px #000000;
+}
+
+video {
+  transition: all 0.5s;
+}
+
+.paused {
+  opacity: 0.5;
+  /* -o-filter: blur(15px); */
+  /* filter: blur(15px); */
+}
+
+.hide {
+  opacity: 0;
 }
 
 p.en {
