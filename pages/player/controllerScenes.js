@@ -27,13 +27,13 @@ document.addEventListener('keydown', e => {
     video.play()
     canStop = true
   }
-  if (e.key === 'd') {
+  if (e.key === 'd' || e.key === 'D') {
     fadeIn()
     video.currentTime = subtitlesDataEn[indexSub + 1].startTime
-  } else if (e.key === 'a') {
+  } else if (e.key === 'a' || e.key === 'A') {
     fadeIn()
     video.currentTime = subtitlesDataEn[indexSub - 1].startTime
-  } else if (e.key === 's') {
+  } else if (e.key === 's' || e.key === 'S') {
     fadeIn()
     video.currentTime = lastSubtitleEn.startTime
   }
@@ -67,8 +67,11 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') {
     video.currentTime -= 1
   }
-  if (e.key === 'c') {
+  if (e.key === 'c' || e.key === 'C') {
     video.controls = !video.controls
+  }
+  if (e.key === 'l' || e.key === 'L') {
+    document.querySelector('.subtitles').classList.toggle('hide')
   }
 })
 

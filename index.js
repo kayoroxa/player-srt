@@ -4,6 +4,7 @@ let mainWindow
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
+    autoHideMenuBar: true,
     width: 800,
     height: 600,
     webPreferences: {
@@ -12,5 +13,6 @@ app.on('ready', () => {
       enableRemoteModule: true,
     },
   })
+  mainWindow.maximize()
   mainWindow.loadURL(`file://${__dirname}/pages/player/player.html`)
 })
