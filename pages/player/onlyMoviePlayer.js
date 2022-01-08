@@ -66,17 +66,27 @@ function handleSubtitleShow(event) {
 function findVideoPath(type, options) {
   const files = fs.readdirSync(pathMovie)
   let file
+  let types
+
+  if (Array.isArray(type)) {
+    types = type
+  } else {
+    types = [type]
+  }
+
+  if (!type) types = ['.mp4', '.mkv', '.avi', '.mov']
+
   if (!options?.pt) {
     file = files.find(
       file =>
-        file.endsWith('.' + type) &&
+        types.some(type => file.toLowerCase().endsWith(type)) &&
         !file.includes('port') &&
         !file.includes('pt')
     )
   } else {
     file = files.find(
       file =>
-        file.endsWith('.' + type) &&
+        types.some(type => file.toLowerCase().endsWith(type)) &&
         (file.includes('port') || file.includes('pt'))
     )
   }
@@ -90,7 +100,7 @@ function findVideoPath(type, options) {
 function onlyMoviePlayer() {
   readMySrt(findVideoPath)
   const video = document.querySelector('video')
-  video.src = findVideoPath('mp4')
+  video.src = findVideoPath()
 
   if (config.start) {
     video.currentTime = convertTimeStr(config.start)
