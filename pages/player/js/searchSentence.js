@@ -14,7 +14,7 @@ function searchSentence() {
 
 function handleKeyDown() {
   document.addEventListener('keydown', e => {
-    if (e.key === 'f') {
+    if (e.key === '.') {
       if (count === -1) count = 0
       else count++
 
@@ -24,12 +24,12 @@ function handleKeyDown() {
 
       obs('warning').notify('show', {
         title: 'Sentence Fast',
-        message: `${count}/${data['mostFastSentence'].length}`,
+        message: `${count}/${data['mostFastSentence'].length} WordsPerSec: ${data['mostFastSentence'][count].wordPerSecond}`,
       })
       document.querySelector('video').play()
     }
 
-    if (e.key === 'g') {
+    if (e.key === ',') {
       count--
 
       document.querySelector('video').currentTime =
@@ -37,7 +37,7 @@ function handleKeyDown() {
 
       obs('warning').notify('show', {
         title: 'Sentence Fast',
-        message: `${count}/${data['mostFastSentence'].length}`,
+        message: `${count}/${data['mostFastSentence'].length} WordsPerSec: ${data['mostFastSentence'][count].wordPerSecond}`,
       })
 
       document.querySelector('video').play()
