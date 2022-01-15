@@ -22,6 +22,8 @@ function handleKeyDown() {
       document.querySelector('video').currentTime =
         data['mostFastSentence'][count].startTime
 
+      document.querySelector('video').play()
+
       obs('warning').notify('show', {
         title: 'Sentence Fast',
         message: `${count}/${data['mostFastSentence'].length}`,
@@ -33,6 +35,8 @@ function handleKeyDown() {
 
       document.querySelector('video').currentTime =
         data['mostFastSentence'][count].startTime
+
+      document.querySelector('video').play()
 
       obs('warning').notify('show', {
         title: 'Sentence Fast',
