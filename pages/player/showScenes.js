@@ -42,8 +42,6 @@ function showScenes() {
       ]
     }, [])
 
-  console.log(movieAndSubtitleWithTeach.length)
-  console.log(movieAndSubtitleWithTeach)
   return movieAndSubtitleWithTeach
 }
 showScenes()

@@ -21,7 +21,7 @@ const textSrtEn = srtDataEn
 
   .join('\n')
 
-console.log(textSrtEn)
+// console.log(textSrtEn)
 // return
 
 const fileTranslation = fs

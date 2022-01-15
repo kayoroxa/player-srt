@@ -11,8 +11,9 @@ video.currentTime = convertTimeStr(times[indexTime][0])
 
 let canStop = true
 let repeating = false
-// let forceStopTeach = true
 
+let lastRepeatIndexSub
+// let forceStopTeach = true
 document.addEventListener('keydown', e => {
   // console.log(e.key)
   if (e.key === 'PageUp' && indexTime < times.length - 1) {
@@ -46,32 +47,33 @@ document.addEventListener('keydown', e => {
     fadeIn()
     video.currentTime = lastSubtitleEn.startTime
   }
-  if (e.key === 'r' || e.key === 'R') {
-    //reoetir video
-    repeating = !repeating
+  // if (e.key === 'r' || e.key === 'R') {
+  //   //reoetir video
+  //   repeating = !repeating
 
-    obs('warning').notify('show', {
-      title: `Repeating: ${repeating}`,
-    })
+  //   obs('warning').notify('show', {
+  //     title: `Repeating: ${repeating}`,
+  //   })
 
-    if (!repeating) {
-      canStop = true
-      return
-    }
+  //   if (!repeating) {
+  //     canStop = true
+  //     return
+  //   }
 
-    canStop = false
+  //   canStop = false
 
-    const handle = () => {
-      if (!repeating) {
-        video.removeEventListener('timeupdate', handle)
-        return
-      }
-      if (video.currentTime >= subtitlesDataEn[indexSub].endTime - 0.2) {
-        video.currentTime = subtitlesDataEn[indexSub].startTime
-      }
-    }
-    video.addEventListener('timeupdate', handle)
-  }
+  //   const handle = () => {
+  //     // repetir
+  //     if (!repeating) {
+  //       video.removeEventListener('timeupdate', handle)
+  //       return
+  //     }
+  //     if (video.currentTime >= subtitlesDataEn[indexSub].endTime - 0.2) {
+  //       video.currentTime = subtitlesDataEn[indexSub].startTime
+  //     }
+  //   }
+  //   video.addEventListener('timeupdate', handle)
+  // }
   if (e.key === ' ') {
     e.preventDefault()
     if (video.paused) {
@@ -120,7 +122,6 @@ video.addEventListener('timeupdate', () => {
 })
 
 function fadeIn(increment = 0.1) {
-  console.log('fadeIn')
   video.volume = 0
   const timer = setInterval(() => {
     if (video.volume < 1) {

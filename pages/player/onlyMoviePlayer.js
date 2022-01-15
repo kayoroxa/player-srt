@@ -55,6 +55,7 @@ function handleSubtitleShow(event) {
 
   //get index of subtitle more closer to current time
   indexSub = getIndexSub(currentTimeMs)
+  lastIndex = indexSub
 
   // console.log({ currentSubtitle, currentTimeMs })
   if (currentSubtitleEn) {
