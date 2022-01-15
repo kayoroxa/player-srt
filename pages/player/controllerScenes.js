@@ -54,14 +54,19 @@ document.addEventListener('keydown', e => {
       title: `Repeating: ${repeating}`,
     })
 
-    if (!repeating) return
+    if (!repeating) {
+      canStop = true
+      return
+    }
+
+    canStop = false
 
     const handle = () => {
       if (!repeating) {
         video.removeEventListener('timeupdate', handle)
         return
       }
-      if (video.currentTime >= subtitlesDataEn[indexSub].endTime - 0.3) {
+      if (video.currentTime >= subtitlesDataEn[indexSub].endTime - 0.2) {
         video.currentTime = subtitlesDataEn[indexSub].startTime
       }
     }
