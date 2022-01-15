@@ -7,6 +7,7 @@ const readSrt = require('../../utils/readSrt')
 const subEn = document.querySelector('p.en')
 const subPt = document.querySelector('p.pt')
 const convertTimeStr = require('../../utils/convertHHMMSS')
+const obs = require('../../utils/observer')
 
 async function readMySrt(findFindPath) {
   const pathSrtEn = findFindPath('srt')
@@ -19,6 +20,11 @@ async function readMySrt(findFindPath) {
   if (!pathSrtPt) return
 
   subtitlesDataPt = readSrt(pathSrtPt)
+
+  obs('subtitle').notify('loaded', {
+    en: subtitlesDataEn,
+    pt: subtitlesDataPt,
+  })
 }
 
 function getIndexSub(currentTimeMs) {

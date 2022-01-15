@@ -7,7 +7,7 @@ function Observer() {
     esperando.push({ evento, func, nameObserver })
   }
 
-  function notificar(evento, params) {
+  function notify(evento, params) {
     esperando.forEach(e => {
       if (e.evento === evento && e.nameObserver === nameObserver) {
         e.func(params)
@@ -20,10 +20,12 @@ function Observer() {
     return {
       addEventListener,
       on: addEventListener,
-      notificar,
+      notify,
     }
   }
 
   return especifiqueObserver
 }
 const obs = Observer()
+
+module.exports = obs

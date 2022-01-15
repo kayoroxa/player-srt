@@ -10,6 +10,7 @@ let indexTime = 0
 video.currentTime = convertTimeStr(times[indexTime][0])
 
 let canStop = true
+let repeating = false
 // let forceStopTeach = true
 
 document.addEventListener('keydown', e => {
@@ -36,6 +37,27 @@ document.addEventListener('keydown', e => {
   } else if (e.key === 's' || e.key === 'S') {
     fadeIn()
     video.currentTime = lastSubtitleEn.startTime
+  }
+  if (e.key === 'r' || e.key === 'R') {
+    //reoetir video
+    repeating = !repeating
+
+    obs('warning').notify('show', {
+      title: `Repeating: ${repeating}`,
+    })
+
+    if (!repeating) return
+
+    const handle = () => {
+      if (!repeating) {
+        video.removeEventListener('timeupdate', handle)
+        return
+      }
+      if (video.currentTime >= subtitlesDataEn[indexSub].endTime - 0.3) {
+        video.currentTime = subtitlesDataEn[indexSub].startTime
+      }
+    }
+    video.addEventListener('timeupdate', handle)
   }
   if (e.key === ' ') {
     e.preventDefault()
