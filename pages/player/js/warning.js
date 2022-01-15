@@ -1,8 +1,10 @@
 const obs = require('../../utils/observer')
 
 const warningElement = document.getElementById('warning')
+let myTimeout
 
 obs('warning').on('show', data => {
+  clearTimeout(myTimeout)
   const title = data?.title ? data?.title : ''
   const message = data?.message ? data?.message : ''
 
@@ -11,7 +13,7 @@ obs('warning').on('show', data => {
   warningElement.classList.add('show')
   warningElement.style.opacity = 1
 
-  setTimeout(() => {
+  myTimeout = setTimeout(() => {
     warningElement.style.opacity = 0
     setTimeout(() => {
       warningElement.classList.remove('show')

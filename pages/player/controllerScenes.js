@@ -21,12 +21,20 @@ document.addEventListener('keydown', e => {
     video.currentTime = convertTimeStr(times[indexTime][0])
     video.play()
     canStop = true
+    obs('warning').notify('show', {
+      title: 'Scene',
+      message: `${indexTime + 1}/${times.length}`,
+    })
   } else if (e.key === 'PageDown' && indexTime > 0) {
     fadeIn(0.01)
     indexTime--
     video.currentTime = convertTimeStr(times[indexTime][0])
     video.play()
     canStop = true
+    obs('warning').notify('show', {
+      title: 'Scene',
+      message: `${indexTime + 1}/${times.length}`,
+    })
   }
   if (e.key === 'd' || e.key === 'D') {
     fadeIn()
