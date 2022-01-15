@@ -6,7 +6,7 @@ function getMostFastSentences(subtitlesData) {
       text,
       startTime: sub.startTime,
       endTime: sub.endTime,
-      wordPerSecond,
+      wordPerSecond: Math.round(wordPerSecond),
       durationClip: Math.round(sub.endTime - sub.startTime),
     }
   })
