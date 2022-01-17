@@ -10,7 +10,6 @@ let indexTime = 0
 video.currentTime = convertTimeStr(times[indexTime][0])
 
 let canStop = true
-let repeating = false
 
 let lastRepeatIndexSub
 // let forceStopTeach = true
@@ -40,40 +39,28 @@ document.addEventListener('keydown', e => {
   if (e.key === 'd' || e.key === 'D') {
     fadeIn()
     video.currentTime = subtitlesDataEn[indexSub + 1].startTime
+    obs('command').notify('changeTime', {
+      start: subtitlesDataEn[indexSub + 1].startTime,
+      end: subtitlesDataEn[indexSub + 1].endTime,
+    })
   } else if (e.key === 'a' || e.key === 'A') {
     fadeIn()
     video.currentTime = subtitlesDataEn[indexSub - 1].startTime
+    obs('command').notify('changeTime', {
+      start: subtitlesDataEn[indexSub - 1].startTime,
+      end: subtitlesDataEn[indexSub - 1].endTime,
+    })
   } else if (e.key === 's' || e.key === 'S') {
     fadeIn()
-    video.currentTime = lastSubtitleEn.startTime
+    changeVideoTime(lastSubtitleEn.startTime)
+    // video.currentTime = lastSubtitleEn.startTime
   }
-  // if (e.key === 'r' || e.key === 'R') {
-  //   //reoetir video
-  //   repeating = !repeating
-
-  //   obs('warning').notify('show', {
-  //     title: `Repeating: ${repeating}`,
-  //   })
-
-  //   if (!repeating) {
-  //     canStop = true
-  //     return
-  //   }
-
-  //   canStop = false
-
-  //   const handle = () => {
-  //     // repetir
-  //     if (!repeating) {
-  //       video.removeEventListener('timeupdate', handle)
-  //       return
-  //     }
-  //     if (video.currentTime >= subtitlesDataEn[indexSub].endTime - 0.2) {
-  //       video.currentTime = subtitlesDataEn[indexSub].startTime
-  //     }
-  //   }
-  //   video.addEventListener('timeupdate', handle)
-  // }
+  if (e.key === 'r' || e.key === 'R') {
+    obs('repetition').notify('toggle', {
+      start: subtitlesDataEn[indexSub].startTime,
+      end: subtitlesDataEn[indexSub].endTime,
+    })
+  }
   if (e.key === ' ') {
     e.preventDefault()
     if (video.paused) {
@@ -139,3 +126,11 @@ function fadeIn(increment = 0.1) {
 video.addEventListener('play', () => {
   fadeIn()
 })
+
+function changeVideoTime(time, newIndexSub) {
+  lastRepeatIndexSub = newIndexSub
+  console.log('changeVideoTime', lastRepeatIndexSub)
+  video.currentTime = time
+  // setTimeout(() => {
+  // }, 500)
+}
