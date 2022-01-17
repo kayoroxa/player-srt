@@ -17,14 +17,14 @@ async function readMySrt(findFindPath) {
 
   subtitlesDataEn = readSrt(pathSrtEn)
 
+  obs('subtitle').notify('loaded', {
+    en: subtitlesDataEn,
+    // pt: subtitlesDataPt,
+  })
+
   if (!pathSrtPt) return
 
   subtitlesDataPt = readSrt(pathSrtPt)
-
-  obs('subtitle').notify('loaded', {
-    en: subtitlesDataEn,
-    pt: subtitlesDataPt,
-  })
 }
 
 function getIndexSub(currentTimeMs) {
