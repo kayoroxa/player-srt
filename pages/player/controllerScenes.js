@@ -4,6 +4,7 @@ const video = document.querySelector('video')
 //on key down change video current time
 
 const convertTimeStr = require('../../utils/convertHHMMSS')
+const obs = require('../../utils/observer')
 
 let indexTime = 0
 // video = document.querySelector('video')
@@ -14,7 +15,6 @@ let canStop = true
 let lastRepeatIndexSub
 // let forceStopTeach = true
 document.addEventListener('keydown', e => {
-  // console.log(e.key)
   if (e.key === 'PageUp' && indexTime < times.length - 1) {
     fadeIn(0.01)
     indexTime++

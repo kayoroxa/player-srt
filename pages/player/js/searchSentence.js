@@ -1,4 +1,4 @@
-// const obs = require('../../utils/observer')
+const obs = require('../../../utils/observer')
 
 const data = {}
 let count = -1

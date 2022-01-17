@@ -1,3 +1,5 @@
+const obs = require('../../../utils/observer')
+
 function getMostFastSentences(subtitlesData) {
   const sentences = subtitlesData.map(sub => {
     const text = sub.text.split(/[\s|\n]/g)

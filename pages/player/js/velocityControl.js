@@ -1,3 +1,5 @@
+const obs = require('../../../utils/observer')
+
 let currentVelocity = 1
 
 document.addEventListener('keydown', e => {

@@ -1,4 +1,4 @@
-const obs = require('../../utils/observer')
+const obs = require('../../../utils/observer')
 
 const warningElement = document.getElementById('warning')
 let myTimeout

@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+const obs = require('../../../utils/observer')
+
 let repeating
 const handleVideo = HandleVideo()
 
