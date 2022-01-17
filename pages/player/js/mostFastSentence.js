@@ -22,5 +22,6 @@ function getMostFastSentences(subtitlesData) {
 
 obs('subtitle').on('loaded', sub => {
   const result = getMostFastSentences(sub.en)
+  // console.log(result)
   obs('player').notify('searchSentence', { query: 'mostFastSentence', result })
 })

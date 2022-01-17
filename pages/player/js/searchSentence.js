@@ -17,7 +17,7 @@ function handleKeyDown() {
     if (e.key === '.') {
       if (count === -1) count = 0
       else count++
-
+      // debugger
       //video current time to
       document.querySelector('video').currentTime =
         data['mostFastSentence'][count].startTime
