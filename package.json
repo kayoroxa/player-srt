@@ -1,12 +1,20 @@
 {
   "scripts": {
-    "dev": "electron ."
+    "dev": "electron .",
+    "erros": "eslint \"**/*.js\" --ignore-pattern node_modules/"
   },
   "dependencies": {
+    "dialogs": "^2.0.1",
     "subtitles-parser": "^0.0.2"
   },
   "devDependencies": {
     "electron": "^16.0.3",
     "eslint": "^8.3.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
   }
 }
