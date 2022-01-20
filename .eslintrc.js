@@ -8,6 +8,10 @@ module.exports = {
   extends: 'eslint:recommended',
   parserOptions: {
     ecmaVersion: 13,
+    sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    'no-unused-vars': 2,
+    'no-undef': 2,
+  },
 }
