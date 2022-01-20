@@ -1,3 +1,4 @@
+const obs = require('../../utils/observer')
 const onlyMoviePlayer = require('./onlyMoviePlayer')
 
 let subtitlesDataEn
@@ -10,4 +11,22 @@ onlyMoviePlayer({
   subtitlesDataPt,
   indexSub,
   lastSubtitleEn,
+})
+
+obs('subtitle').on('get', func => {
+  func({
+    subtitlesDataEn,
+    subtitlesDataPt,
+    indexSub,
+    lastSubtitleEn,
+  })
+})
+
+obs('command').on('keyDown', fuc => {
+  fuc({
+    subtitlesDataEn,
+    subtitlesDataPt,
+    indexSub,
+    lastSubtitleEn,
+  })
 })
