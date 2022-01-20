@@ -4,7 +4,7 @@ const video = document.querySelector('video')
 //on key down change video current time
 
 const convertTimeStr = require('../../utils/convertHHMMSS')
-const obs = require('../../utils/observer')
+// const obs = require('../../utils/observer')
 
 let indexTime = 0
 // video = document.querySelector('video')
@@ -13,63 +13,80 @@ video.currentTime = convertTimeStr(times[indexTime][0])
 let canStop = true
 
 let lastRepeatIndexSub
+
+let shortCutActive = true
+
+obs('command').on('toggle', isActive => {
+  shortCutActive = isActive
+})
 // let forceStopTeach = true
 document.addEventListener('keydown', e => {
+  if (!shortCutActive) return
   if (e.key === 'PageUp' && indexTime < times.length - 1) {
-    fadeIn(0.01)
-    indexTime++
-    video.currentTime = convertTimeStr(times[indexTime][0])
-    video.play()
-    canStop = true
-    obs('warning').notify('show', {
-      title: 'Scene',
-      message: `${indexTime + 1}/${times.length}`,
+    obs('command').notify('keyDown', fuc => {
+      fadeIn(0.01)
+      indexTime++
+      video.currentTime = convertTimeStr(times[indexTime][0])
+      video.play()
+      canStop = true
+      obs('warning').notify('show', {
+        title: 'Scene',
+        message: `${indexTime + 1}/${times.length}`,
+      })
     })
   } else if (e.key === 'PageDown' && indexTime > 0) {
-    fadeIn(0.01)
-    indexTime--
-    video.currentTime = convertTimeStr(times[indexTime][0])
-    video.play()
-    canStop = true
-    obs('warning').notify('show', {
-      title: 'Scene',
-      message: `${indexTime + 1}/${times.length}`,
+    obs('command').notify('keyDown', fuc => {
+      fadeIn(0.01)
+      indexTime--
+      video.currentTime = convertTimeStr(times[indexTime][0])
+      video.play()
+      canStop = true
+      obs('warning').notify('show', {
+        title: 'Scene',
+        message: `${indexTime + 1}/${times.length}`,
+      })
     })
   }
   if (e.key === 'd' || e.key === 'D') {
-    fadeIn()
-    video.currentTime = subtitlesDataEn[indexSub + 1].startTime
-    obs('command').notify('changeTime', {
-      start: subtitlesDataEn[indexSub + 1].startTime,
-      end: subtitlesDataEn[indexSub + 1].endTime,
+    obs('command').notify('keyDown', () => {
+      fadeIn()
+      video.currentTime = subtitlesDataEn[indexSub + 1].startTime
+      obs('command').notify('changeTime', {
+        start: subtitlesDataEn[indexSub + 1].startTime,
+        end: subtitlesDataEn[indexSub + 1].endTime,
+      })
     })
   } else if (e.key === 'a' || e.key === 'A') {
-    fadeIn()
-    video.currentTime = subtitlesDataEn[indexSub - 1].startTime
-    obs('command').notify('changeTime', {
-      start: subtitlesDataEn[indexSub - 1].startTime,
-      end: subtitlesDataEn[indexSub - 1].endTime,
+    obs('command').notify('keyDown', () => {
+      fadeIn()
+      video.currentTime = subtitlesDataEn[indexSub - 1].startTime
+      obs('command').notify('changeTime', {
+        start: subtitlesDataEn[indexSub - 1].startTime,
+        end: subtitlesDataEn[indexSub - 1].endTime,
+      })
     })
   } else if (e.key === 's' || e.key === 'S') {
     fadeIn()
-    changeVideoTime(lastSubtitleEn.startTime)
+    video.currentTime = lastSubtitleEn.startTime
     // video.currentTime = lastSubtitleEn.startTime
   }
   if (e.key === 'r' || e.key === 'R') {
-    obs('repetition').notify('toggle', {
-      start: subtitlesDataEn[indexSub].startTime,
-      end: subtitlesDataEn[indexSub].endTime,
+    obs('command').notify('keyDown', () => {
+      obs('repetition').notify('toggle', {
+        start: subtitlesDataEn[indexSub].startTime,
+        end: subtitlesDataEn[indexSub].endTime,
+      })
     })
   }
   if (e.key === ' ') {
     e.preventDefault()
     if (video.paused) {
       video.classList.remove('paused')
-      document.querySelector('.subtitles').classList.remove('hide')
+      // document.querySelector('.subtitles').classList.remove('hide')
       video.play()
     } else {
       if (!video.controls) {
-        document.querySelector('.subtitles').classList.add('hide')
+        // document.querySelector('.subtitles').classList.add('hide')
         video.classList.add('paused')
       }
       const timer = setInterval(() => {
@@ -130,6 +147,7 @@ video.addEventListener('play', () => {
 function changeVideoTime(time, newIndexSub) {
   lastRepeatIndexSub = newIndexSub
   console.log('changeVideoTime', lastRepeatIndexSub)
+  debugger
   video.currentTime = time
   // setTimeout(() => {
   // }, 500)
