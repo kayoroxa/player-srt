@@ -11,7 +11,10 @@ obs('search').on('searched', ({ query }) => {
   obs('subtitle').notify('get', ({ subtitlesDataEn }) => {
     if (!subtitlesDataEn) return
     const find = subtitlesDataEn.filter(sub => {
-      if (sub.text.includes(query)) return true
+      ///\b($word)\b/i
+      const regex = new RegExp(`\\b(${query})\\b`, 'i')
+      // console.log(sub.text.match(regex))
+      if (sub.text.match(regex)) return true
     })
     myQuery = query.toLowerCase()
     sentencesFind = find.length > 0 ? find : false
