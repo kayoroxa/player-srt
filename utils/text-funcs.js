@@ -1,4 +1,15 @@
 const { teaches } = require('../config-player')
+const obs = require('./observer')
+
+let joinTeaches = teaches
+
+obs('subtitle').on('highLight', ({ match }) => {
+  joinTeaches = teaches
+  if (!match) return
+  if (!joinTeaches.includes(match)) {
+    joinTeaches.push(match)
+  }
+})
 
 function colorTeach(text) {
   const innerText = teaches.reduce((acc, teach) => {

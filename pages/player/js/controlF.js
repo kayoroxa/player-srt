@@ -19,6 +19,8 @@ obs('search').on('searched', ({ query, exactly }) => {
     })
     myQuery = query.toLowerCase()
     sentencesFind = find.length > 0 ? find : false
+
+    obs('subtitle').notify('highLight', { match: query })
   })
 })
 
