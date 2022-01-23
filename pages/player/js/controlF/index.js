@@ -9,6 +9,14 @@ let sentencesFind
 let index = -1
 let myQuery
 
+function changeTime() {
+  obs('warning').notify('show', {
+    title: `${myQuery}`,
+    message: `${index + 1}/${sentencesFind.length}`,
+  })
+  document.querySelector('video').currentTime = sentencesFind[index].startTime
+}
+
 function handleSearch({ query, exactly }) {
   index = -1
   obs('subtitle').notify('get', ({ subtitlesDataEn }) => {
@@ -67,11 +75,3 @@ on('keySearchClick', keySearch)
 on('nextSearchClick', nextSearchClick)
 on('prevSearchClick', prevSearchClick)
 on('searched', handleSearch)
-
-function changeTime() {
-  obs('warning').notify('show', {
-    title: `${myQuery}`,
-    message: `${index + 1}/${sentencesFind.length}`,
-  })
-  document.querySelector('video').currentTime = sentencesFind[index].startTime
-}
