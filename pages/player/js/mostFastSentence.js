@@ -17,7 +17,7 @@ function getMostFastSentences(subtitlesData) {
         durationClip: Math.round(sub.endTime - sub.startTime),
       }
     })
-    .filter(sub => sub.text.length > 10)
+    .filter(sub => sub.text.length > 10 && !sub.text.includes('♪'))
   const mostFastSentences = sentences.sort((a, b) => {
     return b.wordPerSecond - a.wordPerSecond
   })
