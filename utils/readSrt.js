@@ -15,8 +15,10 @@ function readSrt(path, options) {
     const srtFiles = allFiles.filter(
       v => v.endsWith('.srt') && (options?.pt ? havePt(v) : !havePt(v))
     )
-    if (srtFiles.length === 0) throw new Error('No srt file found')
-    if (srtFiles.length > 1) throw new Error('More than one srt file found')
+    if (srtFiles.length === 0) return false
+    if (srtFiles.length > 1) return false
+    // if (srtFiles.length === 0) throw new Error(`No srt file found ${path}`)
+    // if (srtFiles.length > 1) throw new Error('More than one srt file found')
     path = `${path}/${srtFiles[0]}`
   }
   const srt = fs.readFileSync(path, 'utf8')

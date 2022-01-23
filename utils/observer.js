@@ -4,15 +4,17 @@ function Observer() {
   const esperando = []
 
   function addEventListener(evento, func) {
-    esperando.push({ evento, func, nameObserver })
+    esperando.push({ evento, func: func, nameObserver })
   }
 
-  function notify(evento, params) {
+  async function notify(evento, params) {
+    let result
     esperando.forEach(e => {
       if (e.evento === evento && e.nameObserver === nameObserver) {
-        e.func(params)
+        result = e.func(params)
       }
     })
+    return result
   }
 
   function especifiqueObserver(name) {
@@ -29,3 +31,5 @@ function Observer() {
 const obs = Observer()
 
 module.exports = obs
+
+//obs('video').notify('srcChange')

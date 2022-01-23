@@ -27,6 +27,12 @@ async function readMySrt(findFindPath) {
   subtitlesDataPt = readSrt(pathSrtPt)
 }
 
+obs('subtitle').on('change', ({ subEn }) => {
+  // console.log(subEn)
+  subtitlesDataEn = subEn
+  subtitlesDataPt = []
+})
+
 function getIndexSub(currentTimeMs) {
   return subtitlesDataEn.reduce((acc, sub, i) => {
     if (sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs) {
@@ -41,6 +47,9 @@ function handleSubtitleShow(event) {
     return (subEn.textContent = 'sem srt')
 
   const currentTimeMs = event.target.currentTime
+  if (!subtitlesDataEn?.find) {
+    debugger
+  }
 
   const currentSubtitleEn = subtitlesDataEn?.find(sub => {
     return sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs

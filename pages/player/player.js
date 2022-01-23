@@ -13,6 +13,13 @@ onlyMoviePlayer({
   lastSubtitleEn,
 })
 
+obs('subtitle').on('getData', () => ({
+  subtitlesDataEn,
+  subtitlesDataPt,
+  indexSub,
+  lastSubtitleEn,
+}))
+
 obs('subtitle').on('get', func => {
   func({
     subtitlesDataEn,

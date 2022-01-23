@@ -55,18 +55,22 @@ video::-webkit-media-controls-fullscreen-button {
   display: none;
 }
 
+video {
+  position: absolute;
+}
+
 .subtitles {
   transition: all 0.5s;
   z-index: 2;
   position: absolute;
-  bottom: 90px;
+  bottom: 60px;
   left: 0;
   right: 0;
 }
 
 .subtitles > * {
   text-align: center;
-  text-shadow: 3px 3px 1px #000000;
+  text-shadow: 2px 2px 1px #000000;
 }
 
 video {
@@ -84,17 +88,22 @@ video {
 }
 
 p.en {
-  font-size: 3vw;
+  font-size: 3.4vw;
   font-weight: bold;
   color: white;
 }
 p.pt {
-  font-size: 2.5vw;
+  font-size: 2.8vw;
   color: rgb(199, 199, 199);
 }
 .time {
   position: absolute;
   z-index: 100;
+}
+
+#lastVideo {
+  z-index: -1;
+  position: absolute;
 }
 
 /* video fade down to up for subtitle */
