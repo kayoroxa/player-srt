@@ -5,7 +5,12 @@ const { sanitizer } = require('./text-funcs')
 function readSrt(path, options) {
   if (!fs.existsSync(path)) throw new Error('File not found')
   if (!path.endsWith('.srt')) {
-    const allFiles = fs.readdirSync(path)
+    let allFiles
+    try {
+      allFiles = fs.readdirSync(path)
+    } catch (error) {
+      return false
+    }
     const havePt = v => v.includes('pt') || v.includes('port')
     const srtFiles = allFiles.filter(
       v => v.endsWith('.srt') && (options?.pt ? havePt(v) : !havePt(v))
