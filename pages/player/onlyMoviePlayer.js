@@ -27,10 +27,11 @@ async function readMySrt(findFindPath) {
   subtitlesDataPt = readSrt(pathSrtPt)
 }
 
-obs('subtitle').on('change', ({ subEn }) => {
+obs('subtitle').on('change', ({ subEn, subPt }) => {
   // console.log(subEn)
   subtitlesDataEn = subEn
-  subtitlesDataPt = []
+  if (subPt) subtitlesDataPt = subPt
+  else subtitlesDataPt = []
 })
 
 function getIndexSub(currentTimeMs) {
