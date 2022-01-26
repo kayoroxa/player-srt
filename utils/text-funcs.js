@@ -14,9 +14,11 @@ obs('subtitle').on('highLight', ({ match }) => {
 function colorTeach(text) {
   const innerText = teaches.reduce((acc, teach) => {
     if (teach.length < 1) return acc
+    const re = new RegExp(teach, 'gi')
+    const match = text.match(re)
     return acc.replace(
       new RegExp(teach, 'gi'),
-      `<span class="teach">${teach}</span>`
+      `<span class="teach">${match}</span>`
     )
   }, text)
 
