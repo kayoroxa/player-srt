@@ -77,11 +77,15 @@ function searchAllMovie({ query, exactly }) {
       pathMovie: find[index].moviePath,
       type: '.srt',
     })
+    const ptSrtInFolder = pathJoin(find[index].moviePath, 'portuguese.srt')
+
     const srt = readSrt(srtInFolder)
+    const ptSrt = readSrt(ptSrtInFolder) || []
     // console.log({ srt })
     obs('video').notify('srcChange', { src: mp4InFolder })
     obs('video').notify('timeChange', find[index].subFind.startTime)
-    obs('subtitle').notify('change', { subEn: srt })
+    obs('subtitle').notify('change', { subEn: srt, subPt: ptSrt })
+    obs('subtitle').notify('highLight', { match: query })
     obs('warning').notify('show', {
       title: `Search for ${query}`,
       message: `${index + 1}/${find.length}`,
