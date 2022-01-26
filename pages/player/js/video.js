@@ -1,7 +1,25 @@
 const obs = require('../../../utils/observer')
 
 obs('video').on('srcChange', ({ src }) => {
-  document.querySelector('video').src = src
+  const video = document.querySelector('video')
+  video.src = src
+  video.autoplay = true
+  // video.controls = false
+
+  // document.querySelector('.hover').addEventListener(
+  //   'mouseover',
+  //   () => {
+  //     video.controls = true
+  //   },
+  //   false
+  // )
+  // document.querySelector('.hover').addEventListener(
+  //   'mouseout',
+  //   () => {
+  //     video.controls = false
+  //   },
+  //   false
+  // )
   // const lastVideo = document.querySelector('video:last-child')
   // lastVideo.muted = true
 
