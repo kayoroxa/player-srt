@@ -36,12 +36,14 @@ function searchAllMovie({ query, exactly }) {
     const path = pathJoin(pathMovies, file)
     const subtitleEn = readSrt(path)
     if (!subtitleEn) return
+    // const isQueryRegex = query[0] === '*'
 
-    const regex = new RegExp(`\\b(${query})\\b`, 'i')
+    const regex = new RegExp(`\\b(${query})\\b`, 'ig')
+    const regexGeral = new RegExp(`(${query})`, 'ig')
 
     const subFind = subtitleEn.filter(sub => {
       if (exactly && sub.text.toLowerCase().match(regex)) return true
-      else if (!exactly && sub.text.toLowerCase().includes(query)) return true
+      else if (!exactly && sub.text.toLowerCase().match(regexGeral)) return true
     })
     if (subFind.length <= 0 || !subFind) return
 
