@@ -14,6 +14,9 @@ function findVideoPath(options) {
 
   if (!options.type) types = ['.mp4', '.mkv', '.avi', '.mov']
 
+  if (options.name) {
+    file = files.find(file => file.toLowerCase() === options.name)
+  }
   if (!options?.pt) {
     file = files.find(
       file =>
