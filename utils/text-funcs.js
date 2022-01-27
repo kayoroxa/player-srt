@@ -25,13 +25,14 @@ function colorTeach(text) {
   return innerText
 }
 
-function textToInner(text) {
+function textToInner(text, op) {
   if (text.length > 72) {
     text = text.replace(/\n/g, '<br>')
   } else {
     text = text.replace(/\n/g, ' ')
   }
-  text = colorTeach(text)
+  if (op?.highLight !== false) text = colorTeach(text)
+
   return text
 }
 

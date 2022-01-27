@@ -74,7 +74,7 @@ function handleSubtitleShow(event) {
     subEn.innerHTML = ''
   }
   if (currentSubtitlePt) {
-    subPt.innerHTML = textToInner(currentSubtitlePt.text)
+    subPt.innerHTML = textToInner(currentSubtitlePt.text, { highLight: false })
   } else {
     subPt.innerHTML = ''
   }
