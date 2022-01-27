@@ -38,6 +38,8 @@ function searchAllMovie({ query, exactly }) {
     if (!subtitleEn) return
     // const isQueryRegex = query[0] === '*'
 
+    query = query.replace(/__*/g, '_')
+    query = query.replace(/_/g, '.*')
     const regex = new RegExp(`\\b(${query})\\b`, 'ig')
     const regexGeral = new RegExp(`(${query})`, 'ig')
 
