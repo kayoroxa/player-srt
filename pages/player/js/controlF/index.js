@@ -9,6 +9,7 @@ const pathJoin = require('path').join
 const readSrt = require('../../../../utils/readSrt')
 const { findVideoPath } = require('../utils')
 const _ = require('lodash')
+const config = require('../../../../config-player')
 
 let sentencesFind
 let index = -1
@@ -26,8 +27,24 @@ function changeTime() {
 
 function searchAllMovie({ query, exactly }) {
   index = -1
-  const pathMovies = 'F:/movies/'
-  const files = fs.readdirSync(pathMovies)
+  // if (!config.folderMovies) {
+  //   obs('warning').notify('show', {
+  //     title: 'Não foi possível encontrar o diretório de filmes',
+  //     message: 'Verifique se o diretório de filmes está correto',
+  //   })
+  // }
+  const pathMovies = config.folderMovies
+  //check if existe a dir fs
+  if (!fs.existsSync(pathMovies)) {
+    obs('warning').notify('show', {
+      title: 'Não foi possível encontrar o diretório de filmes',
+      message:
+        'Verifique se o "folderMovies" está correto no "config-player.js"',
+    })
+    return
+  }
+  const files = fs.readdirSync(pathMovies) || false
+
   let find = []
 
   // debugger
