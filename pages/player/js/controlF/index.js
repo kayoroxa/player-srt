@@ -1,7 +1,8 @@
+require('./handleKeyDown')
+require('./changeTimeAndVideo')
 const obs = require('../../../../utils/observer')
 const Dialogs = require('dialogs')
 const dialogs = Dialogs()
-require('./handleKeyDown')
 const notify = obs('search').notify
 const on = obs('search').on
 const searchAllMovie = require('./searchAllMovie')
