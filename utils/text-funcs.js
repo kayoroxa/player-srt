@@ -17,8 +17,8 @@ function colorTeach(text) {
     const re = new RegExp(teach, 'gi')
     const match = text.match(re)
     return acc.replace(
-      new RegExp(teach, 'gi'),
-      `<span class="teach">${match}</span>`
+      new RegExp(`${teach}`, 'gi'),
+      `<span class="teach">$1</span>`
     )
   }, text)
 
@@ -44,6 +44,7 @@ function sanitizer(text) {
     .replace(/-/g, '')
     .replace(/\s\s+/g, ' ')
     .replace(/^.*?:/g, '')
+    .replace(/\,(?=\S)/gim, ', ')
     .trim()
 }
 
