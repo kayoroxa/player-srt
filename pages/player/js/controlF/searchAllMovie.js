@@ -1,6 +1,4 @@
-const configPlayer = require('../../../../config-player')
 const obs = require('../../../../utils/observer')
-const fs = require('fs')
 const _ = require('lodash')
 const finderSrtAllMovies = require('./filterAndFindSub')
 
