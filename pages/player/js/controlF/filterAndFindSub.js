@@ -27,7 +27,7 @@ function finderSrtAllMovies({ query, exactly }) {
 
     query = query.replace(/__*/g, '_')
     query = query.replace(/_/g, '.*')
-    const regex = new RegExp(`\\b(${query})\\b`, 'ig')
+    const regex = new RegExp(`(?<=\\s|^)(${query})(?=\\s|$)`, 'ig')
     const regexGeral = new RegExp(`(${query})`, 'ig')
 
     const subFind = subtitleEn.filter(sub => {
