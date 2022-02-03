@@ -55,17 +55,18 @@ function prevScene() {
 function nextSubtitle() {
   obs('command').notify('keyDown', () => {
     fadeIn()
-    video.currentTime = subtitlesDataEn[indexSub + 1].startTime
+    obs('TIME').notify('change-by-index', { index: indexSub + 1 })
     obs('command').notify('changeTime', {
       start: subtitlesDataEn[indexSub + 1].startTime,
       end: subtitlesDataEn[indexSub + 1].endTime,
     })
+    // obs('command').notify('change-time', { index: indexSub + 1 })
   })
 }
 function prevSubtitle() {
   obs('command').notify('keyDown', () => {
     fadeIn()
-    video.currentTime = subtitlesDataEn[indexSub - 1].startTime
+    obs('TIME').notify('change-by-index', { index: indexSub - 1 })
     obs('command').notify('changeTime', {
       start: subtitlesDataEn[indexSub - 1].startTime,
       end: subtitlesDataEn[indexSub - 1].endTime,
@@ -85,50 +86,61 @@ function repeatSubtitle() {
     })
   })
 }
+
+function videoPlayToggle(e) {
+  e.preventDefault()
+  if (video.paused) {
+    video.classList.remove('paused')
+    // document.querySelector('.subtitles').classList.remove('hide')
+    video.play()
+  } else {
+    if (!video.controls) {
+      // document.querySelector('.subtitles').classList.add('hide')
+      video.classList.add('paused')
+    }
+    const timer = setInterval(() => {
+      if (video.volume > 0) {
+        video.volume -= 0.1
+        if (video.volume - 0.1 < 0) {
+          video.pause()
+          video.volume = 0
+        }
+      } else {
+        clearInterval(timer)
+      }
+    }, 20)
+  }
+}
+function handleVideoConfig(method) {
+  if (method === 'control-toggle') {
+    video.controls = !video.controls
+  } else if (method === 'subtitle-toggle') {
+    document.querySelector('.subtitles').classList.toggle('hide')
+  }
+}
+
 obs('CONTROL').on('scene-next', nextScene)
 obs('CONTROL').on('scene-prev', prevScene)
 obs('CONTROL').on('subtitle-next', nextSubtitle)
 obs('CONTROL').on('subtitle-prev', prevSubtitle)
 obs('CONTROL').on('subtitle-current', currentSubtitle)
 obs('CONTROL').on('subtitle-repeat-toggle', repeatSubtitle)
+obs('CONTROL').on('video-play-toggle', videoPlayToggle)
+obs('CONTROL').on('subtitle-repeat-toggle')
+
+obs('CONTROL').on('video-config', handleVideoConfig)
+obs('CONTROL').on('subtitle-show-toggle', () =>
+  document.querySelector('.subtitles').classList.toggle('hide')
+)
 
 document.addEventListener('keydown', e => {
   if (!shortCutActive) return
-  if (e.key === ' ') {
-    e.preventDefault()
-    if (video.paused) {
-      video.classList.remove('paused')
-      // document.querySelector('.subtitles').classList.remove('hide')
-      video.play()
-    } else {
-      if (!video.controls) {
-        // document.querySelector('.subtitles').classList.add('hide')
-        video.classList.add('paused')
-      }
-      const timer = setInterval(() => {
-        if (video.volume > 0) {
-          video.volume -= 0.1
-          if (video.volume - 0.1 < 0) {
-            video.pause()
-            video.volume = 0
-          }
-        } else {
-          clearInterval(timer)
-        }
-      }, 20)
-    }
-  }
+
   if (e.key === 'ArrowRight') {
     video.currentTime += 1
   }
   if (e.key === 'ArrowLeft') {
     video.currentTime -= 1
-  }
-  if (e.key === 'c' || e.key === 'C') {
-    video.controls = !video.controls
-  }
-  if (e.key === 'l' || e.key === 'L') {
-    document.querySelector('.subtitles').classList.toggle('hide')
   }
 })
 

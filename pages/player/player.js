@@ -21,6 +21,7 @@ obs('subtitle').on('getData', () => ({
 }))
 
 obs('subtitle').on('get', func => {
+  if (!subtitlesDataEn) return
   func({
     subtitlesDataEn,
     subtitlesDataPt,

@@ -7,5 +7,5 @@ require('./player')
 require('./js/controlF')
 require('./js/video')
 require('./js/controls')
-
+require('./js/syncVideoSubtitle')
 // require('./player.js')
