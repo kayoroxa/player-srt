@@ -69,12 +69,15 @@ function handleSubtitleShow(event) {
 
   // console.log({ currentSubtitle, currentTimeMs })
   if (currentSubtitleEn) {
+    // obs('warning').notify('show', {
+    //   title: currentSubtitleEn.raw,
+    // })
     subEn.innerHTML = textToInner(currentSubtitleEn.text)
   } else {
     subEn.innerHTML = ''
   }
   if (currentSubtitlePt) {
-    subPt.innerHTML = textToInner(currentSubtitlePt.text, { highLight: false })
+    subPt.innerHTML = textToInner(currentSubtitlePt.text, { portuguese: true })
   } else {
     subPt.innerHTML = ''
   }

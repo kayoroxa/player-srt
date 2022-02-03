@@ -26,6 +26,7 @@ function readSrt(path, options) {
   return subtitles
     .map(v => ({
       ...v,
+      raw: v.text,
       text: sanitizer(v.text),
       startTime: options?.ms ? v.startTime : v.startTime / 1000,
       endTime: options?.ms ? v.endTime : v.endTime / 1000,

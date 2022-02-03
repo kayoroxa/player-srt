@@ -1,5 +1,10 @@
+/* eslint-disable no-useless-escape */
 const { teaches } = require('../config-player')
 const obs = require('./observer')
+const colors = require('../config-colors')
+
+const showColors = true
+const isExemple = false
 
 let joinTeaches = teaches
 
@@ -11,17 +16,74 @@ obs('subtitle').on('highLight', ({ match }) => {
   }
 })
 
+function portugueseColor(text) {
+  const innerText = teaches.reduce((acc, teach) => {
+    if (teach.length < 1) return acc
+    acc = acc.replace(/havia/i, 'existia')
+    acc = acc.replace(/houve/i, 'existiu')
+    acc = acc.replace(/Estarei/i, 'vou estar')
+    acc = acc.replace(/serão/i, 'vão ser')
+    acc = acc.replace(/estaremos/i, 'vamos estar')
+    acc = acc.replace(/ficará/i, 'vai ficar')
+    acc = acc.replace(/seria/i, 'iria ficar')
+    acc = acc.replace(/será/i, 'vai ser')
+    acc = acc.replace(/ficaria/i, 'iria ficar')
+    acc = acc.replace(/estaríamos/i, 'iria estar')
+    acc = acc.replace(/estou/i, 'eu estou')
+    acc = acc.replace(/estará/i, 'vai estar')
+    acc = acc.replace(/passamos /i, 'temos passado')
+    acc = acc.replace(/estive/i, 'tenho estado')
+    acc = acc.replace(/foi/i, 'tem sido')
+    acc = acc.replace(/estou/i, 'tenho estado')
+    acc = acc.replace(/estamos/i, 'temos estado')
+    acc = acc.replace(/Há/i, 'existe')
+    acc = acc.replace(/vamos/i, 'nós vamos')
+
+    return acc.replace(
+      // /(sido|estado)/gi,
+      // /(existe|existem)/gi,
+      /(vai|vamos|vão|vou)/gi,
+      // /(existia|existiam|existiu)/gi,
+      // /(est\S+|\bé\b|ser|era|estava|foi|fosse|estar|sou|ficar|ser)/gi,
+      `<span class="teach">$1</span>`
+    )
+  }, text)
+  return isExemple ? innerText : text
+}
+
 function colorTeach(text) {
   const innerText = teaches.reduce((acc, teach) => {
     if (teach.length < 1) return acc
     const re = new RegExp(teach, 'gi')
     const match = text.match(re)
-    return acc.replace(
-      new RegExp(`${teach}`, 'gi'),
-      `<span class="teach">$1</span>`
-    )
+
+    const regex = isExemple ? teach : `(?<!\\w)(${teach})(?!\\w)`
+    return acc.replace(new RegExp(regex, 'gi'), `<span class="teach">$1</span>`)
   }, text)
 
+  return innerText
+}
+
+function genericsColors(text) {
+  const innerText = colors.reduce((acc, color) => {
+    const regex = new RegExp(color.query, 'gi')
+    if (regex.test(text)) {
+      const hasGroup = regex.exec(text)[1]
+    }
+    function replace() {
+      if (color.type === 'code') {
+        return acc.replace(
+          regex,
+          `<span class="off" style="-webkit-text-stroke: 1px ${color.color}; text-shadow: 2px 2px 0px ${color.color}; color: white">${find}</span>`
+        )
+      } else {
+        return acc.replace(
+          regex,
+          `<span class="off" style="color: ${color.color}; text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);">${find}</span>`
+        )
+      }
+    }
+  }, text)
   return innerText
 }
 
@@ -32,7 +94,7 @@ function textToInner(text, op) {
     text = text.replace(/\n/g, ' ')
   }
   if (op?.highLight !== false) text = colorTeach(text)
-
+  if (op?.portuguese === true) text = portugueseColor(text)
   return text
 }
 
