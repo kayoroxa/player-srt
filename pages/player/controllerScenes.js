@@ -20,9 +20,9 @@ obs('command').on('toggle', isActive => {
   shortCutActive = isActive
 })
 // let forceStopTeach = true
-document.addEventListener('keydown', e => {
-  if (!shortCutActive) return
-  if (e.key === 'PageUp' && indexTime < times.length - 1) {
+
+function nextScene() {
+  if (indexTime < times.length - 1) {
     obs('command').notify('keyDown', fuc => {
       fadeIn(0.01)
       indexTime++
@@ -34,7 +34,11 @@ document.addEventListener('keydown', e => {
         message: `${indexTime + 1}/${times.length}`,
       })
     })
-  } else if (e.key === 'PageDown' && indexTime > 0) {
+  }
+}
+function prevScene() {
+  console.log('oii')
+  if (indexTime > 0) {
     obs('command').notify('keyDown', fuc => {
       fadeIn(0.01)
       indexTime--
@@ -47,6 +51,14 @@ document.addEventListener('keydown', e => {
       })
     })
   }
+}
+
+obs('CONTROL').on('scene-next', nextScene)
+obs('CONTROL').on('scene-prev', prevScene)
+
+document.addEventListener('keydown', e => {
+  if (!shortCutActive) return
+
   if (e.key === 'd' || e.key === 'D') {
     obs('command').notify('keyDown', () => {
       fadeIn()

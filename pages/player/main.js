@@ -6,5 +6,6 @@ require('./js/searchSentence')
 require('./player')
 require('./js/controlF')
 require('./js/video')
+require('./js/controls')
 
 // require('./player.js')
