@@ -52,44 +52,48 @@ function prevScene() {
     })
   }
 }
+function nextSubtitle() {
+  obs('command').notify('keyDown', () => {
+    fadeIn()
+    video.currentTime = subtitlesDataEn[indexSub + 1].startTime
+    obs('command').notify('changeTime', {
+      start: subtitlesDataEn[indexSub + 1].startTime,
+      end: subtitlesDataEn[indexSub + 1].endTime,
+    })
+  })
+}
+function prevSubtitle() {
+  obs('command').notify('keyDown', () => {
+    fadeIn()
+    video.currentTime = subtitlesDataEn[indexSub - 1].startTime
+    obs('command').notify('changeTime', {
+      start: subtitlesDataEn[indexSub - 1].startTime,
+      end: subtitlesDataEn[indexSub - 1].endTime,
+    })
+  })
+}
 
+function currentSubtitle() {
+  fadeIn()
+  video.currentTime = lastSubtitleEn.startTime
+}
+function repeatSubtitle() {
+  obs('command').notify('keyDown', () => {
+    obs('repetition').notify('toggle', {
+      start: subtitlesDataEn[indexSub].startTime,
+      end: subtitlesDataEn[indexSub].endTime,
+    })
+  })
+}
 obs('CONTROL').on('scene-next', nextScene)
 obs('CONTROL').on('scene-prev', prevScene)
+obs('CONTROL').on('subtitle-next', nextSubtitle)
+obs('CONTROL').on('subtitle-prev', prevSubtitle)
+obs('CONTROL').on('subtitle-current', currentSubtitle)
+obs('CONTROL').on('subtitle-repeat-toggle', repeatSubtitle)
 
 document.addEventListener('keydown', e => {
   if (!shortCutActive) return
-
-  if (e.key === 'd' || e.key === 'D') {
-    obs('command').notify('keyDown', () => {
-      fadeIn()
-      video.currentTime = subtitlesDataEn[indexSub + 1].startTime
-      obs('command').notify('changeTime', {
-        start: subtitlesDataEn[indexSub + 1].startTime,
-        end: subtitlesDataEn[indexSub + 1].endTime,
-      })
-    })
-  } else if (e.key === 'a' || e.key === 'A') {
-    obs('command').notify('keyDown', () => {
-      fadeIn()
-      video.currentTime = subtitlesDataEn[indexSub - 1].startTime
-      obs('command').notify('changeTime', {
-        start: subtitlesDataEn[indexSub - 1].startTime,
-        end: subtitlesDataEn[indexSub - 1].endTime,
-      })
-    })
-  } else if (e.key === 's' || e.key === 'S') {
-    fadeIn()
-    video.currentTime = lastSubtitleEn.startTime
-    // video.currentTime = lastSubtitleEn.startTime
-  }
-  if (e.key === 'r' || e.key === 'R') {
-    obs('command').notify('keyDown', () => {
-      obs('repetition').notify('toggle', {
-        start: subtitlesDataEn[indexSub].startTime,
-        end: subtitlesDataEn[indexSub].endTime,
-      })
-    })
-  }
   if (e.key === ' ') {
     e.preventDefault()
     if (video.paused) {
