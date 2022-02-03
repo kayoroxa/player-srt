@@ -6,11 +6,7 @@ const video = document.querySelector('video')
 const convertTimeStr = require('../../utils/convertHHMMSS')
 // const obs = require('../../utils/observer')
 
-let indexTime = 0
 // video = document.querySelector('video')
-video.currentTime = convertTimeStr(times[indexTime][0])
-
-let canStop = true
 
 let lastRepeatIndexSub
 
@@ -21,63 +17,6 @@ obs('command').on('toggle', isActive => {
 })
 // let forceStopTeach = true
 
-function nextScene() {
-  if (indexTime < times.length - 1) {
-    obs('command').notify('keyDown', fuc => {
-      fadeIn(0.01)
-      indexTime++
-      video.currentTime = convertTimeStr(times[indexTime][0])
-      video.play()
-      canStop = true
-      obs('warning').notify('show', {
-        title: 'Scene',
-        message: `${indexTime + 1}/${times.length}`,
-      })
-    })
-  }
-}
-function prevScene() {
-  console.log('oii')
-  if (indexTime > 0) {
-    obs('command').notify('keyDown', fuc => {
-      fadeIn(0.01)
-      indexTime--
-      video.currentTime = convertTimeStr(times[indexTime][0])
-      video.play()
-      canStop = true
-      obs('warning').notify('show', {
-        title: 'Scene',
-        message: `${indexTime + 1}/${times.length}`,
-      })
-    })
-  }
-}
-function nextSubtitle() {
-  obs('command').notify('keyDown', () => {
-    fadeIn()
-    obs('TIME').notify('change-by-index', { index: indexSub + 1 })
-    obs('command').notify('changeTime', {
-      start: subtitlesDataEn[indexSub + 1].startTime,
-      end: subtitlesDataEn[indexSub + 1].endTime,
-    })
-    // obs('command').notify('change-time', { index: indexSub + 1 })
-  })
-}
-function prevSubtitle() {
-  obs('command').notify('keyDown', () => {
-    fadeIn()
-    obs('TIME').notify('change-by-index', { index: indexSub - 1 })
-    obs('command').notify('changeTime', {
-      start: subtitlesDataEn[indexSub - 1].startTime,
-      end: subtitlesDataEn[indexSub - 1].endTime,
-    })
-  })
-}
-
-function currentSubtitle() {
-  fadeIn()
-  video.currentTime = lastSubtitleEn.startTime
-}
 function repeatSubtitle() {
   obs('command').notify('keyDown', () => {
     obs('repetition').notify('toggle', {
@@ -119,11 +58,6 @@ function handleVideoConfig(method) {
   }
 }
 
-obs('CONTROL').on('scene-next', nextScene)
-obs('CONTROL').on('scene-prev', prevScene)
-obs('CONTROL').on('subtitle-next', nextSubtitle)
-obs('CONTROL').on('subtitle-prev', prevSubtitle)
-obs('CONTROL').on('subtitle-current', currentSubtitle)
 obs('CONTROL').on('subtitle-repeat-toggle', repeatSubtitle)
 obs('CONTROL').on('video-play-toggle', videoPlayToggle)
 obs('CONTROL').on('subtitle-repeat-toggle')
@@ -145,13 +79,6 @@ document.addEventListener('keydown', e => {
 })
 
 //on video time update more than time end
-
-video.addEventListener('timeupdate', () => {
-  if (video.currentTime >= convertTimeStr(times[indexTime][1])) {
-    if (canStop) video.pause()
-    canStop = false
-  }
-})
 
 function fadeIn(increment = 0.1) {
   video.volume = 0
