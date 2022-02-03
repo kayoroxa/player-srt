@@ -14,7 +14,7 @@ document.addEventListener('keydown', function (e) {
   } else if (e.key.toLowerCase() === 'd') {
     obs('CONTROL').notify('subtitle-next')
   } else if (e.key.toLowerCase() === 's') {
-    obs('CONTROL').notify('subtitle-atual')
+    obs('CONTROL').notify('subtitle-current')
   } else if (e.key.toLowerCase() === 'r') {
     obs('CONTROL').notify('subtitle-repeat-toggle')
   } else if (e.key.toLowerCase() === 'c') {
