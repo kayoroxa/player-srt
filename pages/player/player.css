@@ -40,7 +40,20 @@ body {
 }
 
 span.teach {
-  color: rgba(0, 166, 255, 0.926);
+  /* background: linear-gradient(to right, #dfdfdf, #ff006e); */
+  /* background: #d3c500; */
+  background: rgba(0, 166, 255, 0.926);
+
+  padding: 2px 5px;
+  color: white;
+  border-radius: 10px;
+  /* margin: 0, 10px; */
+
+  /* color: #ff006e; */
+  /* color: #f95f14; */
+  /* color: #3a86ff; */
+  /* color: #8ac926; */
+  /* color: rgba(0, 166, 255, 0.926); */
 }
 
 video {
