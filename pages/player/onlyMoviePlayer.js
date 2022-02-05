@@ -8,28 +8,12 @@ const subEn = document.querySelector('p.en')
 const subPt = document.querySelector('p.pt')
 const convertTimeStr = require('../../utils/convertHHMMSS')
 const obs = require('../../utils/observer')
-
-async function readMySrt(findFindPath) {
-  const pathSrtEn = findFindPath('srt')
-  const pathSrtPt = findFindPath('srt', { pt: true })
-
-  if (!pathSrtEn) return
-
-  subtitlesDataEn = readSrt(pathSrtEn)
-
-  obs('subtitle').notify('loaded', {
-    en: subtitlesDataEn,
-    // pt: subtitlesDataPt,
-  })
-
-  if (!pathSrtPt) return
-
-  subtitlesDataPt = readSrt(pathSrtPt)
-}
+const subtitle = require('./Subtitle')
 
 obs('subtitle').on('change', ({ subEn, subPt }) => {
   // console.log(subEn)
   subtitlesDataEn = subEn
+  // subtitle.changeSrt
   if (subPt) subtitlesDataPt = subPt
   else subtitlesDataPt = []
 })
@@ -64,6 +48,7 @@ function handleSubtitleShow(event) {
   // debugger
 
   //get index of subtitle more closer to current time
+  subtitle.changeIndexSub(getIndexSub(currentTimeMs))
   indexSub = getIndexSub(currentTimeMs)
   lastIndex = indexSub
 
@@ -118,7 +103,6 @@ function findVideoPath(type, options) {
 }
 
 function onlyMoviePlayer() {
-  readMySrt(findVideoPath)
   const video = document.querySelector('video')
   video.src = findVideoPath()
 

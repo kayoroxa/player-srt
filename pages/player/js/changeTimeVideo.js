@@ -1,6 +1,7 @@
 const { times } = require('../../../config-player')
 const convertTimeStr = require('../../../utils/convertHHMMSS')
 const obs = require('../../../utils/observer')
+const subtitle = require('../Subtitle')
 const video = document.querySelector('video')
 
 let indexTime = 0
@@ -41,32 +42,28 @@ function prevScene() {
 function nextSubtitle() {
   obs('command').notify('keyDown', () => {
     // fadeIn()
-    obs('subtitle').notify('get', ({ subtitlesDataEn, indexSub }) => {
-      video.currentTime = subtitlesDataEn[indexSub + 1].startTime
-      obs('command').notify('changeTime', {
-        start: subtitlesDataEn[indexSub + 1].startTime,
-        end: subtitlesDataEn[indexSub + 1].endTime,
-      })
+    const { en } = subtitle.changeIndexSub(index => index + 1)
+    video.currentTime = en.startTime
+    obs('command').notify('changeTime', {
+      start: en.startTime,
+      end: en.endTime,
     })
   })
 }
 function prevSubtitle() {
   obs('command').notify('keyDown', () => {
     // fadeIn()
-    obs('subtitle').notify('get', ({ subtitlesDataEn, indexSub }) => {
-      video.currentTime = subtitlesDataEn[indexSub - 1].startTime
-      obs('command').notify('changeTime', {
-        start: subtitlesDataEn[indexSub - 1].startTime,
-        end: subtitlesDataEn[indexSub - 1].endTime,
-      })
+    const { en } = subtitle.changeIndexSub(index => index - 1)
+    video.currentTime = en.startTime
+    obs('command').notify('changeTime', {
+      start: en.startTime,
+      end: en.endTime,
     })
   })
 }
 
 function currentSubtitle() {
-  obs('subtitle').notify('get', ({ lastSubtitleEn }) => {
-    video.currentTime = lastSubtitleEn.startTime
-  })
+  video.currentTime = subtitle.getLastSub().en.startTime
 }
 
 video.addEventListener('timeupdate', () => {

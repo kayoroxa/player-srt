@@ -99,11 +99,11 @@ video.addEventListener('play', () => {
   fadeIn()
 })
 
-function changeVideoTime(time, newIndexSub) {
-  lastRepeatIndexSub = newIndexSub
-  console.log('changeVideoTime', lastRepeatIndexSub)
-  debugger
-  video.currentTime = time
-  // setTimeout(() => {
-  // }, 500)
-}
+// function changeVideoTime(time, newIndexSub) {
+//   lastRepeatIndexSub = newIndexSub
+//   console.log('changeVideoTime', lastRepeatIndexSub)
+//   debugger
+//   video.currentTime = time
+//   // setTimeout(() => {
+//   // }, 500)
+// }

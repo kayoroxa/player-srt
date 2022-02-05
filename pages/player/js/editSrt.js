@@ -1,5 +1,4 @@
 const obs = require('../../../utils/observer')
-
 let editable = false
 
 obs('CONTROL').on('edit-srt-toggle', () => {

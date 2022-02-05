@@ -1,5 +1,6 @@
 const obs = require('../../../../utils/observer')
 const readSrt = require('../../../../utils/readSrt')
+const subtitle = require('../../Subtitle')
 const { findVideoPath } = require('../utils')
 const pathJoin = require('path').join
 
@@ -14,6 +15,8 @@ function changeTimeAndVideo({ exactly, query, index, find }) {
 
   const srt = readSrt(srtInFolder)
   const ptSrt = readSrt(ptSrtInFolder) || []
+
+  subtitle.changeSrt(find[index].moviePath)
 
   // console.log({ srt })
   obs('video').notify('srcChange', { src: mp4InFolder })
