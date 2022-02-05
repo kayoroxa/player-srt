@@ -1,4 +1,3 @@
-require('./handleKeyDown')
 require('./changeTimeAndVideo')
 const obs = require('../../../../utils/observer')
 const Dialogs = require('dialogs')
