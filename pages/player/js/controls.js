@@ -26,6 +26,8 @@ document.addEventListener('keydown', function (e) {
     obs('CONTROL').notify('video-config', 'control-toggle')
   } else if (e.key === ' ') {
     obs('CONTROL').notify('video-play-toggle', e)
+  } else if (e.key === 'e') {
+    obs('CONTROL').notify('edit-srt-toggle')
   }
 })
 
