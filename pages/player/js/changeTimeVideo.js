@@ -40,25 +40,21 @@ function prevScene() {
   }
 }
 function nextSubtitle() {
-  obs('command').notify('keyDown', () => {
-    // fadeIn()
-    const { en } = subtitle.changeIndexSub(index => index + 1)
-    video.currentTime = en.startTime
-    obs('command').notify('changeTime', {
-      start: en.startTime,
-      end: en.endTime,
-    })
+  // fadeIn()
+  const { en } = subtitle.changeIndexSub(index => index + 1)
+  video.currentTime = en.startTime
+  obs('command').notify('changeTime', {
+    start: en.startTime,
+    end: en.endTime,
   })
 }
 function prevSubtitle() {
-  obs('command').notify('keyDown', () => {
-    // fadeIn()
-    const { en } = subtitle.changeIndexSub(index => index - 1)
-    video.currentTime = en.startTime
-    obs('command').notify('changeTime', {
-      start: en.startTime,
-      end: en.endTime,
-    })
+  // fadeIn()
+  const { en } = subtitle.changeIndexSub(index => index - 1)
+  video.currentTime = en.startTime
+  obs('command').notify('changeTime', {
+    start: en.startTime,
+    end: en.endTime,
   })
 }
 
