@@ -21,11 +21,12 @@ function changeTime() {
 
 function keySearch(e) {
   e.preventDefault()
-  obs('command').notify('toggle', false)
+  // obs('command').notify('toggle', false)
+  obs('CONTROL').notify('shortcut-toggle', false)
 
   dialogs.prompt('Search Sentence', query => {
     notify('addListeningKey')
-    obs('command').notify('toggle', true)
+    obs('CONTROL').notify('shortcut-toggle', true)
 
     if (query === undefined || query === '') return
     obs('search').notify('searched', {

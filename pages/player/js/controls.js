@@ -20,13 +20,17 @@ document.addEventListener('keydown', function (e) {
     obs('CONTROL').notify('subtitle-current')
   } else if (e.key.toLowerCase() === 'r') {
     obs('CONTROL').notify('subtitle-repeat-toggle')
+  } else if (e.key.toLowerCase() === '.') {
+    obs('CONTROL').notify('most-fast-next')
+  } else if (e.key.toLowerCase() === ',') {
+    obs('CONTROL').notify('most-fast-prev')
   } else if (e.key.toLowerCase() === 'l') {
     obs('CONTROL').notify('subtitle-show-toggle')
   } else if (e.key.toLowerCase() === 'c') {
     obs('CONTROL').notify('video-config', 'control-toggle')
   } else if (e.key === ' ') {
     obs('CONTROL').notify('video-play-toggle', e)
-  } else if (e.key === 'e') {
+  } else if (e.key.toLowerCase() === 'e') {
     obs('CONTROL').notify('edit-srt-toggle')
   }
 })

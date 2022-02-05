@@ -13,35 +13,33 @@ function searchSentence() {
 }
 
 function handleKeyDown() {
-  document.addEventListener('keydown', e => {
-    if (e.key === '.') {
-      if (count === -1) count = 0
-      else count++
-      // debugger
-      //video current time to
-      document.querySelector('video').currentTime =
-        data['mostFastSentence'][count].startTime
+  obs('CONTROL').on('most-fast-next', () => {
+    if (count === -1) count = 0
+    else count++
+    // debugger
+    //video current time to
+    document.querySelector('video').currentTime =
+      data['mostFastSentence'][count].startTime
 
-      obs('warning').notify('show', {
-        title: 'Sentence Fast',
-        message: `${count}/${data['mostFastSentence'].length} WordsPerSec: ${data['mostFastSentence'][count].wordPerSecond}`,
-      })
-      document.querySelector('video').play()
-    }
+    obs('warning').notify('show', {
+      title: 'Sentence Fast',
+      message: `${count}/${data['mostFastSentence'].length} WordsPerSec: ${data['mostFastSentence'][count].wordPerSecond}`,
+    })
+    document.querySelector('video').play()
+  })
 
-    if (e.key === ',') {
-      count--
+  obs('CONTROL').on('most-fast-prev', () => {
+    count--
 
-      document.querySelector('video').currentTime =
-        data['mostFastSentence'][count].startTime
+    document.querySelector('video').currentTime =
+      data['mostFastSentence'][count].startTime
 
-      obs('warning').notify('show', {
-        title: 'Sentence Fast',
-        message: `${count}/${data['mostFastSentence'].length} WordsPerSec: ${data['mostFastSentence'][count].wordPerSecond}`,
-      })
+    obs('warning').notify('show', {
+      title: 'Sentence Fast',
+      message: `${count}/${data['mostFastSentence'].length} WordsPerSec: ${data['mostFastSentence'][count].wordPerSecond}`,
+    })
 
-      document.querySelector('video').play()
-    }
+    document.querySelector('video').play()
   })
 }
 
