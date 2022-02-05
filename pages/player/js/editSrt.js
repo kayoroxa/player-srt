@@ -17,6 +17,10 @@ obs('CONTROL').on('edit-srt-toggle', () => {
     child.addEventListener('focus', e => {
       obs('EDIT_SRT').notify('editing', e.target)
     })
+    // on blur
+    child.addEventListener('blur', () => {
+      obs('CONTROL').notify('shortcut-toggle', true)
+    })
   }
 })
 
@@ -27,7 +31,6 @@ obs('EDIT_SRT').on('editing', elem => {
       e.preventDefault()
       obs('EDIT_SRT').notify('text-changed', elem)
       elem.blur()
-      obs('CONTROL').notify('shortcut-toggle', true)
     }
   })
 })
