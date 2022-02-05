@@ -1,3 +1,7 @@
+// function sleep(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms))
+// }
+
 function Observer() {
   let nameObserver = ''
 
@@ -8,6 +12,7 @@ function Observer() {
   }
 
   async function notify(evento, params) {
+    // await sleep(10)
     let result
     esperando.forEach(e => {
       if (e.evento === evento && e.nameObserver === nameObserver) {
@@ -16,6 +21,10 @@ function Observer() {
     })
     return result
   }
+
+  // function get(evento, func) {
+
+  // }
 
   function especifiqueObserver(name) {
     nameObserver = name
@@ -31,5 +40,3 @@ function Observer() {
 const obs = Observer()
 
 module.exports = obs
-
-//obs('video').notify('srcChange')
