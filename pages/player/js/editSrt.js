@@ -21,12 +21,13 @@ obs('CONTROL').on('edit-srt-toggle', () => {
 })
 
 obs('EDIT_SRT').on('editing', elem => {
-  console.log('editing', elem)
+  obs('CONTROL').notify('shortcut-toggle', false)
   document.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       e.preventDefault()
       obs('EDIT_SRT').notify('text-changed', elem)
       elem.blur()
+      obs('CONTROL').notify('shortcut-toggle', true)
     }
   })
 })
