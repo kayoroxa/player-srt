@@ -36,11 +36,11 @@ function handleSubtitleShow(event) {
     debugger
   }
 
-  const currentSubtitleEn = subtitlesDataEn?.find(sub => {
+  const currentSubtitleEn = subtitle.subData.en?.find(sub => {
     return sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs
   })
 
-  const currentSubtitlePt = subtitlesDataPt?.find(sub => {
+  const currentSubtitlePt = subtitle.subData.pt?.find(sub => {
     return sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs
   })
 
