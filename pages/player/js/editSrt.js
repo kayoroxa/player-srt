@@ -1,4 +1,5 @@
 const obs = require('../../../utils/observer')
+const subtitle = require('../Subtitle')
 let editable = false
 let editing = false
 
@@ -28,26 +29,45 @@ obs('CONTROL').on('edit-srt-toggle', () => {
 
 obs('EDIT_SRT').on('editing', elem => {
   obs('CONTROL').notify('shortcut-toggle', false)
+  const listener = e => {
+    if (e.key === 'Enter' && editing) {
+      e.preventDefault()
+      obs('EDIT_SRT').notify('text-changed', {
+        elem,
+      })
+      elem.blur()
+      editing = false
+    }
+    if (e.key === 'Escape' && editing) {
+      e.preventDefault()
+      elem.blur()
+      editing = false
+    }
+  }
   document.addEventListener(
     'keydown',
-    e => {
-      if (e.key === 'Enter' && editing) {
-        e.preventDefault()
-        obs('EDIT_SRT').notify('text-changed', elem)
-        elem.blur()
-        editing = false
-      }
-      if (e.key === 'Escape' && editing) {
-        e.preventDefault()
-        elem.blur()
-        editing = false
-      }
-    }
+    listener
     // { once: true }
   )
+  elem.addEventListener('blur', () => {
+    document.removeEventListener('keydown', listener)
+  })
 })
 
-obs('EDIT_SRT').on('text-changed', elem => {
+obs('EDIT_SRT').on('text-changed', ({ elem }) => {
+  subtitle.writeSrt(({ prev, index }) => {
+    console.log('id', elem.id)
+    console.log('index', index)
+    return prev.map((item, i) => {
+      if (i === index) {
+        return {
+          ...item,
+          text: elem.innerText,
+        }
+      }
+      return item
+    })
+  }, elem.id)
   obs('warning').notify('show', {
     title: `Text changed ${elem.innerText}`,
   })

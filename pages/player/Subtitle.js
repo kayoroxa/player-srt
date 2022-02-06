@@ -19,6 +19,8 @@ function Subtitle() {
     pt: [],
   }
 
+  let lastSubtitle = false
+
   function readMySrt(folderPath, obj) {
     if (!obj?.lag) throw new Error('obj.lag is required')
 
@@ -58,13 +60,18 @@ function Subtitle() {
     infoPath.pt = pt.path
   }
 
-  function writeSrt(language, callback) {
-    const path = infoPath[language]
-    const newData = callback(subData[language])
-    const dataStr = parser.toSrt(newData)
-    fs.writeFile(path, dataStr, err => {
-      if (err) console.log(err)
+  function writeSrt(callback, language) {
+    // const path = infoPath[language]
+    const newData = callback({
+      prev: subData[language],
+      index: lastSubtitle.subsIndex[language],
     })
+    console.log(newData[500])
+    subData[language] = newData
+    // const dataStr = parser.toSrt(newData)
+    // fs.writeFile(path, dataStr, err => {
+    //   if (err) console.log(err)
+    // })
   }
 
   function changeIndexSub(indexOrCallBack) {
@@ -73,19 +80,28 @@ function Subtitle() {
     } else {
       othersInfo.indexSentenceSub = indexOrCallBack
     }
-    return {
+    const ptIndex = subData.pt.findIndex(
+      pt => pt.id === subData.en[othersInfo.indexSentenceSub].id
+    )
+    lastSubtitle = {
+      subsIndex: {
+        pt: ptIndex,
+        en: othersInfo.indexSentenceSub,
+      },
       en: subData.en[othersInfo.indexSentenceSub],
-      pt: subData.pt[othersInfo.indexSentenceSub],
+      pt: subData.pt[ptIndex],
     }
+    return lastSubtitle
   }
 
   function getLastSub() {
-    return {
-      en: subData.en[othersInfo.indexSentenceSub],
-      pt: subData.pt[othersInfo.indexSentenceSub],
-    }
+    return lastSubtitle
   }
 
+  function getIndexSub() {
+    console.log('getIndexSub', othersInfo.indexSentenceSub)
+    return othersInfo.indexSentenceSub
+  }
   changeSrt(configPlayer.path)
 
   return {
@@ -96,6 +112,7 @@ function Subtitle() {
     subData,
     changeIndexSub,
     getLastSub,
+    getIndexSub,
   }
 }
 
