@@ -40,6 +40,11 @@ document.addEventListener('keydown', function (e) {
   } else if (e.key === 'o' || e.key === 'O') {
     obs('search').notify('prevSearchClick', e)
   }
+  if (e.key.toLowerCase() === '2') {
+    obs('CONTROL').notify('video-speed-fast')
+  } else if (e.key.toLowerCase() === '1') {
+    obs('CONTROL').notify('video-speed-slow')
+  }
 })
 
 obs('CONTROL').on('shortcut-toggle', value => {
