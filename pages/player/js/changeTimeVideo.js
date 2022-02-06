@@ -11,32 +11,51 @@ video.currentTime = convertTimeStr(times[indexTime][0])
 
 function nextScene() {
   if (indexTime < times.length - 1) {
-    obs('command').notify('keyDown', () => {
-      // fadeIn(0.01)
-      indexTime++
-      video.currentTime = convertTimeStr(times[indexTime][0])
-      video.play()
-      canStop = true
-      obs('warning').notify('show', {
-        title: 'Scene',
-        message: `${indexTime + 1}/${times.length}`,
-      })
+    // obs('command').notify('keyDown', () => {
+    // fadeIn(0.01)
+    indexTime++
+    video.currentTime = convertTimeStr(times[indexTime][0])
+    video.play()
+    canStop = true
+    obs('warning').notify('show', {
+      title: 'Scene',
+      message: `${indexTime + 1}/${times.length}`,
     })
+
+    // const translation = subtitle.subData.pt
+    //   .filter(
+    //     sub =>
+    //       sub.startTime > convertTimeStr(times[indexTime][0]) &&
+    //       sub.startTime < convertTimeStr(times[indexTime][1])
+    //   )
+    //   .map(sub => sub.text)
+    //   .join('\n')
+    // debugger
+    // console.log(subtitle.subData.pt[0])
+    // console.log(translation)
   }
 }
 function prevScene() {
   if (indexTime > 0) {
-    obs('command').notify('keyDown', () => {
-      // fadeIn(0.01)
-      indexTime--
-      video.currentTime = convertTimeStr(times[indexTime][0])
-      video.play()
-      canStop = true
-      obs('warning').notify('show', {
-        title: 'Scene',
-        message: `${indexTime + 1}/${times.length}`,
-      })
+    // obs('command').notify('keyDown', () => {
+    // fadeIn(0.01)
+    indexTime--
+    video.currentTime = convertTimeStr(times[indexTime][0])
+    video.play()
+    canStop = true
+    obs('warning').notify('show', {
+      title: 'Scene',
+      message: `${indexTime + 1}/${times.length}`,
     })
+
+    // const translation = subtitle.subData.pt.filter(
+    //   sub =>
+    //     sub.startTime > times[indexTime][0] &&
+    //     sub.startTime < times[indexTime][1]
+    // )
+
+    // console.log(translation)
+    // })
   }
 }
 function nextSubtitle() {
@@ -59,7 +78,13 @@ function prevSubtitle() {
 }
 
 function currentSubtitle() {
-  video.currentTime = subtitle.getLastSub().en.startTime
+  const last = subtitle.getLastSub().en.startTime
+  if (video.currentTime < last + 0.5) {
+    const { en } = subtitle.changeIndexSub(index => index - 1)
+    video.currentTime = en.startTime
+  } else {
+    video.currentTime = last
+  }
 }
 
 video.addEventListener('timeupdate', () => {
