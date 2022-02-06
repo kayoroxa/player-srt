@@ -4,17 +4,14 @@ let editable = false
 let editing = false
 
 obs('CONTROL').on('edit-srt-toggle', () => {
-  obs('warning').notify('show', {
-    title: `Editable ${editable}`,
-  })
-  editable = !editable
+  obs('EDIT_SRT').notify('toggle-editable', !editable)
 
   const subtitleElement = document.querySelector('.subtitles')
 
   //loop all children
   for (let i = 0; i < subtitleElement.children.length; i++) {
     const child = subtitleElement.children[i]
-    child.setAttribute('contenteditable', editable)
+
     // on select
     child.addEventListener('focus', e => {
       obs('EDIT_SRT').notify('editing', e.target)
@@ -27,7 +24,20 @@ obs('CONTROL').on('edit-srt-toggle', () => {
   }
 })
 
+obs('EDIT_SRT').on('toggle-editable', toggle => {
+  editable = toggle
+  obs('warning').notify('show', {
+    title: `Editable ${editable}`,
+  })
+  const subtitleElement = document.querySelector('.subtitles')
+  for (let i = 0; i < subtitleElement.children.length; i++) {
+    const child = subtitleElement.children[i]
+    child.setAttribute('contenteditable', editable)
+  }
+})
+
 obs('EDIT_SRT').on('editing', elem => {
+  obs('EDIT_SRT').notify('toggle-editing', true)
   obs('CONTROL').notify('shortcut-toggle', false)
   const listener = e => {
     if (e.key === 'Enter' && editing) {
@@ -36,12 +46,12 @@ obs('EDIT_SRT').on('editing', elem => {
         elem,
       })
       elem.blur()
-      editing = false
+      obs('EDIT_SRT').notify('toggle-editable', false)
     }
     if (e.key === 'Escape' && editing) {
       e.preventDefault()
       elem.blur()
-      editing = false
+      obs('EDIT_SRT').notify('toggle-editable', false)
     }
   }
   document.addEventListener(
@@ -68,7 +78,4 @@ obs('EDIT_SRT').on('text-changed', ({ elem }) => {
       return item
     })
   }, elem.id)
-  obs('warning').notify('show', {
-    title: `Text changed ${elem.innerText}`,
-  })
 })
