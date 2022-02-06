@@ -51,3 +51,7 @@ obs('video').on('timeChange', time => {
 
   // obs('video').notify('newVideoCanShow')
 })
+
+document.querySelector('video').addEventListener('focus', () => {
+  document.querySelector('video').blur()
+})
