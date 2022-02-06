@@ -1,5 +1,6 @@
 const obs = require('../../../utils/observer')
 let editable = false
+let editing = false
 
 obs('CONTROL').on('edit-srt-toggle', () => {
   obs('warning').notify('show', {
@@ -16,6 +17,7 @@ obs('CONTROL').on('edit-srt-toggle', () => {
     // on select
     child.addEventListener('focus', e => {
       obs('EDIT_SRT').notify('editing', e.target)
+      editing = true
     })
     // on blur
     child.addEventListener('blur', () => {
@@ -26,13 +28,23 @@ obs('CONTROL').on('edit-srt-toggle', () => {
 
 obs('EDIT_SRT').on('editing', elem => {
   obs('CONTROL').notify('shortcut-toggle', false)
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      obs('EDIT_SRT').notify('text-changed', elem)
-      elem.blur()
+  document.addEventListener(
+    'keydown',
+    e => {
+      if (e.key === 'Enter' && editing) {
+        e.preventDefault()
+        obs('EDIT_SRT').notify('text-changed', elem)
+        elem.blur()
+        editing = false
+      }
+      if (e.key === 'Escape' && editing) {
+        e.preventDefault()
+        elem.blur()
+        editing = false
+      }
     }
-  })
+    // { once: true }
+  )
 })
 
 obs('EDIT_SRT').on('text-changed', elem => {
