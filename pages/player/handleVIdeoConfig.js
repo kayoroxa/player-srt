@@ -67,15 +67,11 @@ obs('CONTROL').on('subtitle-show-toggle', () =>
   document.querySelector('.subtitles').classList.toggle('hide')
 )
 
-document.addEventListener('keydown', e => {
-  if (!shortCutActive) return
-
-  if (e.key === 'ArrowRight') {
-    video.currentTime += 1
-  }
-  if (e.key === 'ArrowLeft') {
-    video.currentTime -= 1
-  }
+obs('CONTROL').on('video-walking-next-time', () => {
+  video.currentTime += 1
+})
+obs('CONTROL').on('video-walking-prev-time', () => {
+  video.currentTime -= 1
 })
 
 //on video time update more than time end

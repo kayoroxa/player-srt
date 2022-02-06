@@ -45,6 +45,12 @@ document.addEventListener('keydown', function (e) {
   } else if (e.key.toLowerCase() === '1') {
     obs('CONTROL').notify('video-speed-slow')
   }
+
+  if (e.key === 'ArrowRight') {
+    obs('CONTROL').notify('video-walking-next-time')
+  } else if (e.key === 'ArrowLeft') {
+    obs('CONTROL').notify('video-walking-prev-time')
+  }
 })
 
 obs('CONTROL').on('shortcut-toggle', value => {
