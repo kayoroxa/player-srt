@@ -33,7 +33,7 @@ document.addEventListener('keydown', function (e) {
   } else if (e.key.toLowerCase() === 'e') {
     obs('CONTROL').notify('edit-srt-toggle')
   }
-  if (e.key.toLowerCase() === 'f') {
+  if (e.key.toLowerCase() === 'f' || e.key.toLowerCase() === '*') {
     obs('search').notify('keySearchClick', e)
   } else if (e.key === 'p' || e.key === 'P') {
     obs('search').notify('nextSearchClick', e)
