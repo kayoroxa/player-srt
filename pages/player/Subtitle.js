@@ -61,17 +61,25 @@ function Subtitle() {
   }
 
   function writeSrt(callback, language) {
-    // const path = infoPath[language]
+    const path = infoPath[language]
     const newData = callback({
       prev: subData[language],
       index: lastSubtitle.subsIndex[language],
     })
     console.log(newData[500])
     subData[language] = newData
-    // const dataStr = parser.toSrt(newData)
-    // fs.writeFile(path, dataStr, err => {
-    //   if (err) console.log(err)
-    // })
+
+    const dataStr = parser.toSrt(
+      newData.map(sub => ({
+        ...sub,
+        startTime: sub.startTime * 1000,
+        endTime: sub.endTime * 1000,
+      }))
+    )
+
+    fs.writeFile(path, dataStr, err => {
+      if (err) console.log(err)
+    })
   }
 
   function changeIndexSub(indexOrCallBack) {
