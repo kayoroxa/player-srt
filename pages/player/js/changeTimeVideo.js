@@ -60,7 +60,10 @@ function prevScene() {
 }
 function nextSubtitle() {
   // fadeIn()
-  const { en } = subtitle.changeIndexSub(index => index + 1)
+  const realNext = video.currentTime >= subtitle.getLastSub().en.startTime
+  const { en } = subtitle.changeIndexSub(index =>
+    realNext ? index + 1 : index
+  )
   video.currentTime = en.startTime
   obs('command').notify('changeTime', {
     start: en.startTime,
