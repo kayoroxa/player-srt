@@ -52,3 +52,27 @@ obs('command').on('keyDown', fuc => {
     lastSubtitleEn,
   })
 })
+
+// function splitSubtitlePtSpans() {
+//   const pt = document.querySelector('#pt')
+//   // pt.innerHTML = pt.innerHTML.split(' ').join('</span><span>')
+//   const palavras = pt.innerHTML?.match(/[^\s|!|.|,]+/g)
+//   console.log(palavras)
+
+//   const newInner = palavras.reduce((acc, cur) => {
+//     return acc.replace(cur, `<span>${cur}</span>`)
+//   }, pt.innerHTML)
+
+//   pt.innerHTML = newInner
+
+//   pt.querySelectorAll('span').forEach(span => {
+//     span.addEventListener('click', () => {
+//       span.classList.toggle('teach')
+//     })
+//   })
+// }
+
+// // splitSubtitlePtSpans()
+
+// //global variable
+// window.splitSubtitlePtSpans = splitSubtitlePtSpans

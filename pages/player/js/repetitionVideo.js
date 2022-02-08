@@ -17,7 +17,6 @@ obs('command').on('changeTime', ({ start, end }) => {
     // canStop = true
     return
   }
-  console.log('changeTime', { start, end })
   // handleVideo.create({ start, end })
 })
 
