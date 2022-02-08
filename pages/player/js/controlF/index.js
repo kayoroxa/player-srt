@@ -1,4 +1,5 @@
 require('./changeTimeAndVideo')
+require('./automaticallyNextSearch')
 const obs = require('../../../../utils/observer')
 const Dialogs = require('dialogs')
 const dialogs = Dialogs()

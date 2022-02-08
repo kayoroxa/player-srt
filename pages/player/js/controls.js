@@ -39,6 +39,8 @@ document.addEventListener('keydown', function (e) {
     obs('search').notify('nextSearchClick', e)
   } else if (e.key === 'o' || e.key === 'O') {
     obs('search').notify('prevSearchClick', e)
+  } else if (e.key.toLowerCase() === 'ç') {
+    obs('CONTROL').notify('toggle-automatically-next-search')
   }
   if (e.key.toLowerCase() === '2') {
     obs('CONTROL').notify('video-speed-fast')

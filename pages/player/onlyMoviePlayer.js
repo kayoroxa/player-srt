@@ -48,8 +48,16 @@ function handleSubtitleShow(event) {
   // debugger
 
   //get index of subtitle more closer to current time
-  subtitle.changeIndexSub(getIndexSub(currentTimeMs))
+  const oldIndexSub = indexSub
+
   indexSub = getIndexSub(currentTimeMs)
+  if (oldIndexSub !== indexSub) {
+    // console.log('oiii')
+    obs('subtitle').notify('sentence-sub-end')
+  }
+
+  subtitle.changeIndexSub(indexSub)
+
   lastIndex = indexSub
 
   // console.log({ currentSubtitle, currentTimeMs })
