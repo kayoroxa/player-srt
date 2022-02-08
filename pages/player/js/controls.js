@@ -51,6 +51,9 @@ document.addEventListener('keydown', function (e) {
   } else if (e.key === 'ArrowLeft') {
     obs('CONTROL').notify('video-walking-prev-time')
   }
+  if (e.key.toLowerCase() === 'b') {
+    obs('CONTROL').notify('saveClip')
+  }
 })
 
 obs('CONTROL').on('shortcut-toggle', value => {
