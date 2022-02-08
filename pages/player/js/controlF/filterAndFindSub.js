@@ -2,8 +2,9 @@ const readSrt = require('../../../../utils/readSrt')
 const pathJoin = require('path').join
 const configPlayer = require('../../../../config-player')
 const fs = require('fs')
+const subtitle = require('../../Subtitle')
 
-function finderSrtAllMovies({ query, exactly }) {
+function finderSrtAllMovies({ query, exactly, sameMovie }) {
   const pathMovies = configPlayer.folderMovies
 
   if (!fs.existsSync(pathMovies)) {
@@ -14,9 +15,9 @@ function finderSrtAllMovies({ query, exactly }) {
     // })
     return false
   }
-
-  const files = fs.readdirSync(pathMovies) || false
-
+  let files = []
+  if (sameMovie) files = [subtitle.infoPath.folder.replace(/.*\//g, '')]
+  else files = fs.readdirSync(pathMovies) || false
   let find = []
 
   files.forEach(file => {

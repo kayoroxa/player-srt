@@ -2,7 +2,7 @@ const obs = require('../../../../utils/observer')
 const _ = require('lodash')
 const finderSrtAllMovies = require('./filterAndFindSub')
 
-function searchAllMovie({ query, exactly }) {
+function searchAllMovie({ query, exactly, sameMovie }) {
   // let index = await obs('search').notify('getIndex')
   let index = 0
   index = -1
@@ -15,7 +15,7 @@ function searchAllMovie({ query, exactly }) {
 
   //check if existe a dir fs
 
-  let find = finderSrtAllMovies({ query, exactly })
+  let find = finderSrtAllMovies({ query, exactly, sameMovie })
 
   find = _.shuffle(find)
 

@@ -29,8 +29,9 @@ function keySearch(e) {
 
     if (query === undefined || query === '') return
     obs('search').notify('searched', {
-      query,
+      query: query.trim().replace(/;/g, ''),
       exactly: e.key.toLowerCase() === 'f',
+      sameMovie: query.includes(';'),
     })
   })
   notify('addListeningKey')
