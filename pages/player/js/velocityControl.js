@@ -1,4 +1,5 @@
 const obs = require('../../../utils/observer')
+const subtitle = require('../Subtitle')
 
 let currentVelocity = 1
 
@@ -11,6 +12,13 @@ obs('CONTROL').on('video-speed-fast', () => {
     title: 'Velocity',
     message: Math.round(currentVelocity * 10) / 10,
   })
+})
+
+let lastFolderMovie
+obs('subtitle').on('change', () => {
+  if (lastFolderMovie !== subtitle.infoPath.folder) {
+    document.querySelector('video').playbackRate = currentVelocity
+  }
 })
 
 obs('CONTROL').on('video-speed-slow', () => {
