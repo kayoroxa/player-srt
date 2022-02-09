@@ -6,6 +6,7 @@
   "dependencies": {
     "dialogs": "^2.0.1",
     "lodash": "^4.17.21",
+    "module-alias": "^2.2.2",
     "readline-sync": "^1.4.10",
     "subtitles-parser": "^0.0.2"
   },
