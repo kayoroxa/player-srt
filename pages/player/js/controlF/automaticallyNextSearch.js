@@ -11,6 +11,13 @@ obs('CONTROL').on('toggle-automatically-next-search', () => {
   })
 })
 
+obs('search').on('prevSearchClick', () => {
+  ignoreLast = false
+})
+obs('search').on('nextSearchClick', () => {
+  ignoreLast = false
+})
+
 obs('subtitle').on('sentence-sub-end', () => {
   ignoreLast = !ignoreLast
   if (!toggle || ignoreLast) return
