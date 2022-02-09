@@ -30,7 +30,7 @@ function keySearch(e) {
 
     if (query === undefined || query === '') return
     obs('search').notify('searched', {
-      query: query.trim().replace(/;/g, ''),
+      query: queryConvert(query),
       exactly: e.key.toLowerCase() === 'f',
       sameMovie: query.includes(';'),
     })
@@ -53,6 +53,17 @@ function prevSearchClick() {
   }
 }
 
+function queryConvert(textQuery) {
+  let newQuery = textQuery
+  if (textQuery.includes('&&')) {
+    newQuery =
+      newQuery
+        .split(/&&/g)
+        .map(v => `(?=.*\\b${v}\\b)`)
+        .join('') + '.*'
+  }
+  return newQuery.replace(/;/g, '').trim()
+}
 on('keySearchClick', keySearch)
 on('nextSearchClick', nextSearchClick)
 on('prevSearchClick', prevSearchClick)
