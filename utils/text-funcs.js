@@ -87,6 +87,12 @@ function genericsColors(text) {
   return innerText
 }
 
+function innerTxtSplittedByKeys(text) {
+  return text
+    .replace(/\{.*?\}/g, '<span class="teach">$&</span>')
+    .replace(/[{}]/g, '')
+}
+
 function textToInner(text, op) {
   if (text.length > 72) {
     text = text.replace(/\n/g, '<br>')
@@ -94,7 +100,7 @@ function textToInner(text, op) {
     text = text.replace(/\n/g, ' ')
   }
   if (op?.highLight !== false) text = colorTeach(text)
-  if (op?.portuguese === true) text = portugueseColor(text)
+  if (op?.portuguese === true) text = innerTxtSplittedByKeys(text)
   return text
 }
 
