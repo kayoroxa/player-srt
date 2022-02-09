@@ -63,8 +63,8 @@ obs('CONTROL').on('video-play-toggle', videoPlayToggle)
 obs('CONTROL').on('subtitle-repeat-toggle')
 
 obs('CONTROL').on('video-config', handleVideoConfig)
-obs('CONTROL').on('subtitle-show-toggle', () =>
-  document.querySelector('.subtitles').classList.toggle('hide')
+obs('CONTROL').on('subtitle-show-toggle', toggle =>
+  document.querySelector('.subtitles').classList.toggle('hide', toggle)
 )
 
 obs('CONTROL').on('video-walking-next-time', () => {
