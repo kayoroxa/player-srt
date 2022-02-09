@@ -1,4 +1,6 @@
 const obs = require('../../../utils/observer')
+const subtitle = require('../Subtitle')
+let count = -1
 
 function getMostFastSentences(subtitlesData) {
   const sentences = subtitlesData
@@ -24,8 +26,31 @@ function getMostFastSentences(subtitlesData) {
   return mostFastSentences
 }
 
-obs('subtitle').on('loaded', sub => {
-  const result = getMostFastSentences(sub.en)
-  // console.log(result)
-  obs('player').notify('searchSentence', { query: 'mostFastSentence', result })
+const mostFaster = getMostFastSentences(subtitle.subData.en)
+
+obs('CONTROL').on('most-fast-next', () => {
+  if (count === -1) count = 0
+  else count++
+  // debugger
+  //video current time to
+  document.querySelector('video').currentTime = mostFaster[count].startTime
+
+  obs('warning').notify('show', {
+    title: 'Sentence Fast',
+    message: `${count}/${mostFaster.length} WordsPerSec: ${mostFaster[count].wordPerSecond}`,
+  })
+  document.querySelector('video').play()
+})
+
+obs('CONTROL').on('most-fast-prev', () => {
+  count--
+
+  document.querySelector('video').currentTime = mostFaster[count].startTime
+
+  obs('warning').notify('show', {
+    title: 'Sentence Fast',
+    message: `${count}/${mostFaster.length} WordsPerSec: ${mostFaster[count].wordPerSecond}`,
+  })
+
+  document.querySelector('video').play()
 })
