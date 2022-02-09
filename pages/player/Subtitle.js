@@ -18,7 +18,7 @@ function Subtitle() {
     en: [],
     pt: [],
   }
-
+  let lastIndex = -1
   let lastSubtitle = false
 
   function readMySrt(folderPath, obj) {
@@ -83,11 +83,15 @@ function Subtitle() {
   }
 
   function changeIndexSub(indexOrCallBack) {
+    let newIndex
     if (typeof indexOrCallBack === 'function') {
-      othersInfo.indexSentenceSub = indexOrCallBack(othersInfo.indexSentenceSub)
+      newIndex = indexOrCallBack(othersInfo.indexSentenceSub)
     } else {
-      othersInfo.indexSentenceSub = indexOrCallBack
+      newIndex = indexOrCallBack
     }
+    if (lastIndex === newIndex) return
+    othersInfo.indexSentenceSub = newIndex
+
     const ptIndex = subData.pt.findIndex(
       pt => pt.id === subData.en[othersInfo.indexSentenceSub].id
     )
@@ -99,6 +103,8 @@ function Subtitle() {
       en: subData.en[othersInfo.indexSentenceSub],
       pt: subData.pt[ptIndex],
     }
+    lastIndex = newIndex
+    obs('subtitle').notify('changeIndex', lastSubtitle)
     return lastSubtitle
   }
 
