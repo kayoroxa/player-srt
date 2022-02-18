@@ -50,8 +50,23 @@ function portugueseColor(text) {
   }, text)
   return isExemple ? innerText : text
 }
+//sort by size word
+const allWords2 = require('../utils/allWords2.json')
+  .slice(0, 500)
+  .sort((a, b) => b.word.length - a.word.length)
 
-function colorTeach(text) {
+const hightLightMostUsed = false
+
+function colorTeach(text, op) {
+  if (!op?.pt && hightLightMostUsed) {
+    // return text
+    return allWords2.reduce((acc, cur) => {
+      // match all words in text span
+      const regex = new RegExp(`(?<!\\w)(${cur.word})(?!\\w)`, 'gi')
+      return acc.replace(regex, `<span class="color-text">$1</span>`)
+    }, text)
+  }
+
   const innerText = teaches.reduce((acc, teach) => {
     if (teach.length < 1) return acc
     const re = new RegExp(teach, 'gi')
@@ -99,7 +114,7 @@ function textToInner(text, op) {
   } else {
     text = text.replace(/\n/g, ' ')
   }
-  if (op?.highLight !== false) text = colorTeach(text)
+  if (op?.highLight !== false) text = colorTeach(text, { pt: op?.portuguese })
   if (op?.portuguese === true) text = innerTxtSplittedByKeys(text)
   return text
 }
