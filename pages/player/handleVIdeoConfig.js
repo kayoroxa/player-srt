@@ -1,4 +1,4 @@
-const { times, timesEnd } = require('../../config-player')
+const { subtitlePt = true } = require('../../config-player')
 const video = document.querySelector('video')
 // const convertTimeStr = require('../../utils/convertHHMMSS')
 //on key down change video current time
@@ -63,9 +63,14 @@ obs('CONTROL').on('video-play-toggle', videoPlayToggle)
 obs('CONTROL').on('subtitle-repeat-toggle')
 
 obs('CONTROL').on('video-config', handleVideoConfig)
-obs('CONTROL').on('subtitle-show-toggle', toggle =>
-  document.querySelector('.subtitles').classList.toggle('hide', !toggle)
-)
+obs('CONTROL').on('subtitle-show-toggle', toggle => {
+  document.querySelector('.subtitles').classList.toggle('hide')
+  document.querySelector('.video-gradient').classList.toggle('hide')
+
+  if (toggle !== undefined) {
+    document.querySelector('.subtitles').classList.toggle('hide', !toggle)
+  }
+})
 
 obs('CONTROL').on('video-walking-next-time', () => {
   video.currentTime += 1
@@ -94,6 +99,10 @@ function fadeIn(increment = 0.1) {
 video.addEventListener('play', () => {
   fadeIn()
 })
+
+if (!subtitlePt) {
+  document.querySelector('#pt').style.display = 'none'
+}
 
 // function changeVideoTime(time, newIndexSub) {
 //   lastRepeatIndexSub = newIndexSub
