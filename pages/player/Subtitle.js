@@ -82,7 +82,7 @@ function Subtitle() {
     })
   }
 
-  function changeIndexSub(indexOrCallBack) {
+  function changeIndexSub(indexOrCallBack, notify) {
     let newIndex
     if (typeof indexOrCallBack === 'function') {
       newIndex = indexOrCallBack(othersInfo.indexSentenceSub)
@@ -104,7 +104,7 @@ function Subtitle() {
       pt: subData.pt[ptIndex],
     }
     lastIndex = newIndex
-    obs('subtitle').notify('changeIndex', lastSubtitle)
+    if (notify) obs('subtitle').notify('changeIndex', lastSubtitle)
     return lastSubtitle
   }
 

@@ -27,12 +27,18 @@ obs('search').on('nextSearchClick', () => {
   ignoreLast = false
 })
 
+obs('search').on('prevSearchClick', () => {
+  if (toggle) tempDisabled = false
+  ignoreLast = false
+})
+
 obs('CONTROL').on('subtitle-prev', () => {
   tempDisabled = true
   ignoreLast = false
 })
 
 obs('CONTROL').on('subtitle-next', () => {
+  tempDisabled = true
   ignoreLast = false
 })
 

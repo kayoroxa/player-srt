@@ -55,3 +55,7 @@ obs('video').on('timeChange', time => {
 document.querySelector('video').addEventListener('focus', () => {
   document.querySelector('video').blur()
 })
+
+obs('subtitle').on('changeIndex', lastSubtitle => {
+  document.querySelector('video').currentTime = lastSubtitle.en.startTime
+})

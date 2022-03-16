@@ -56,6 +56,10 @@ span.teach {
   /* color: rgba(0, 166, 255, 0.926); */
 }
 
+span.color-text {
+  color: rgba(4, 217, 255, 0.926);
+}
+
 video {
   width: 100%;
   height: 100%;
@@ -91,7 +95,7 @@ video {
 }
 
 .paused {
-  opacity: 0.5;
+  /* opacity: 0.5; */
   /* -o-filter: blur(15px); */
   /* filter: blur(15px); */
 }

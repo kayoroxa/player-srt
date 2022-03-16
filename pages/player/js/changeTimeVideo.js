@@ -91,7 +91,7 @@ function currentSubtitle() {
 }
 
 video.addEventListener('timeupdate', () => {
-  if (video.currentTime >= convertTimeStr(times[indexTime][1])) {
+  if (video.currentTime >= convertTimeStr(times[indexTime][1]) + 2) {
     if (canStop) video.pause()
     canStop = false
   }

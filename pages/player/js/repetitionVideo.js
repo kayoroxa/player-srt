@@ -1,18 +1,21 @@
 const obs = require('../../../utils/observer')
+const subtitle = require('../Subtitle')
 
 let repeating
 const handleVideo = HandleVideo()
 
-obs('repetition').on('toggle', ({ start, end }) => {
+obs('repetition').on('toggle', () => {
   repeating = !repeating
-  console.log('toggle')
   obs('warning').notify('show', {
     title: `Repetition ${repeating}`,
   })
-  handleVideo.create({ start, end })
+  const { startTime, endTime, text } = subtitle.getLastSub().en
+  console.log(text)
+  handleVideo.create({ start: startTime, end: endTime })
+  obs('repetition').notify('changed', repeating)
 })
 
-obs('command').on('changeTime', ({ start, end }) => {
+obs('command').on('changeTime', () => {
   if (!repeating) {
     // canStop = true
     return

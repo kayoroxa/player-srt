@@ -16,3 +16,5 @@ app.on('ready', () => {
   mainWindow.maximize()
   mainWindow.loadURL(`file://${__dirname}/pages/player/player.html`)
 })
+//♪
+// /#
