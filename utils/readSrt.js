@@ -21,7 +21,7 @@ function readSrt(path, options) {
     // if (srtFiles.length > 1) throw new Error('More than one srt file found')
     path = `${path}/${srtFiles[0]}`
   }
-  const srt = fs.readFileSync(path, 'utf8')
+  const srt = fs.readFileSync(path, 'utf8').replace(/(?<=\d\d)\.(?=\d\d)/g, ',')
   const subtitles = parser.fromSrt(srt, true)
   return subtitles
     .map(v => ({
