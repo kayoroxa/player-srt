@@ -85,6 +85,12 @@ video {
   right: 0;
 }
 
+.subtitles.center {
+  position: absolute;
+  bottom: 300px;
+  margin: auto;
+}
+
 .subtitles > * {
   text-align: center;
   text-shadow: 2px 2px 1px #000000;
