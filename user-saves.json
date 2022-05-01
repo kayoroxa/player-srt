@@ -349,5 +349,32 @@
         "raw": "Sure enough did. Look at that baby.\nGo ahead, you can touch it."
       }
     }
+  },
+  {
+    "infoPath": {
+      "folder": "H:/texto para praticar inglês/T1",
+      "en": "H:/texto para praticar inglês/T1/[English] LEARN ENGLISH PODCAST_ YOU MUST DO THIS TO IMPROVE FAST (+ BEST METHOD) [DownSub.com] - Copy.srt",
+      "pt": "H:/texto para praticar inglês/T1/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 17,
+        "en": 17
+      },
+      "en": {
+        "id": "18",
+        "startTime": 53.41,
+        "endTime": 55.17,
+        "text": "I'm also going to give you some examples",
+        "raw": "I'm also going to give you some examples"
+      },
+      "pt": {
+        "id": "18",
+        "startTime": 53.41,
+        "endTime": 55.17,
+        "text": "Eu também vou dar alguns exemplos",
+        "raw": "Eu também vou dar alguns exemplos"
+      }
+    }
   }
 ]
