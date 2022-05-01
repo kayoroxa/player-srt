@@ -60,11 +60,12 @@ function prevScene() {
 }
 function nextSubtitle() {
   // fadeIn()
-  const realNext = video.currentTime >= subtitle.getLastSub().en.startTime
-  const { en } = subtitle.changeIndexSub(index =>
-    realNext ? index + 1 : index
+  // const realNext = video.currentTime >= subtitle.getLastSub().en.startTime
+  const { en } = subtitle.changeIndexSub(
+    index => index + 1
+    // realNext ? index + 1 : index
   )
-  video.currentTime = en.startTime
+  video.currentTime = en.startTime + 0.01
   obs('command').notify('changeTime', {
     start: en.startTime,
     end: en.endTime,
@@ -73,7 +74,7 @@ function nextSubtitle() {
 function prevSubtitle() {
   // fadeIn()
   const { en } = subtitle.changeIndexSub(index => index - 1)
-  video.currentTime = en.startTime
+  video.currentTime = en.startTime + 0.01
   obs('command').notify('changeTime', {
     start: en.startTime,
     end: en.endTime,
@@ -81,12 +82,13 @@ function prevSubtitle() {
 }
 
 function currentSubtitle() {
+  // debugger
   const last = subtitle.getLastSub().en.startTime
   if (video.currentTime < last + 0.5) {
     const { en } = subtitle.changeIndexSub(index => index - 1)
-    video.currentTime = en.startTime
+    video.currentTime = en.startTime + 0.01
   } else {
-    video.currentTime = last
+    video.currentTime = last + 0.01
   }
 }
 
