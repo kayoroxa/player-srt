@@ -63,6 +63,12 @@ document.addEventListener('keydown', function (e) {
   if (e.key.toLowerCase() === 'h') {
     obs('CONTROL').notify('game-show-help')
   }
+  if (e.key.toLowerCase() === 'j') {
+    obs('CONTROL').notify('clips')
+  }
+  if (e.key.toLowerCase() === 'v') {
+    obs('CONTROL').notify('disable-video')
+  }
 })
 
 obs('CONTROL').on('shortcut-toggle', value => {

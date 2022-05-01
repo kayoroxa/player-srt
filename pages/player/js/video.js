@@ -59,3 +59,10 @@ document.querySelector('video').addEventListener('focus', () => {
 obs('subtitle').on('changeIndex', lastSubtitle => {
   document.querySelector('video').currentTime = lastSubtitle.en.startTime
 })
+
+let toggleVideo = true
+
+obs('CONTROL').on('disable-video', () => {
+  toggleVideo = !toggleVideo
+  document.querySelector('video').style.opacity = toggleVideo ? 1 : 0
+})
