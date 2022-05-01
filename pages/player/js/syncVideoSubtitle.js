@@ -1,13 +1,13 @@
-const obs = require('../../../utils/observer')
+// const obs = require('../../../utils/observer')
 
-const video = document.querySelector('video')
+// const video = document.querySelector('video')
 
-function subSync() {}
+// function subSync() {}
 
-video.addEventListener('timeupdate', subSync)
+// video.addEventListener('timeupdate', subSync)
 
-obs('TIME').on('change-by-index', ({ index }) => {
-  obs('subtitle').notify('get', ({ subtitlesDataEn }) => {
-    video.currentTime = subtitlesDataEn[index].startTime
-  })
-})
+// obs('TIME').on('change-by-index', ({ index }) => {
+//   obs('subtitle').notify('get', ({ subtitlesDataEn }) => {
+//     video.currentTime = subtitlesDataEn[index].startTime
+//   })
+// })
