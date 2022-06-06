@@ -8,3 +8,11 @@ obs('CONTROL').on('disable-video', () => {
     .querySelector('.player .subtitles')
     .classList.toggle('center', toggleCenter)
 })
+
+let toggleSubtitle = true
+
+obs('CONTROL').on('toggle-pt-subtitle', () => {
+  toggleSubtitle = !toggleSubtitle
+  document.querySelector('.player .subtitles .pt').style.display =
+    toggleSubtitle ? 'block' : 'none'
+})

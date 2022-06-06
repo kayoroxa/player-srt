@@ -42,6 +42,11 @@ document.addEventListener('keydown', function (e) {
   } else if (e.key.toLowerCase() === 'ç') {
     obs('CONTROL').notify('toggle-automatically-next-search')
   }
+  if (e.key.toLowerCase() === 'l') {
+    obs('search').notify('prevSaveClick')
+  } else if (e.key.toLowerCase() === 'k') {
+    obs('search').notify('nextSaveClick')
+  }
   if (e.key.toLowerCase() === '2') {
     obs('CONTROL').notify('video-speed-fast')
   } else if (e.key.toLowerCase() === '1') {
@@ -56,7 +61,7 @@ document.addEventListener('keydown', function (e) {
   if (e.key.toLowerCase() === 'b') {
     obs('CONTROL').notify('saveClip')
   }
-  if (e.key.toLowerCase() === 'i') {
+  if (e.key.toLowerCase() === 'u') {
     obs('CONTROL').notify('show-info')
   }
 
@@ -68,6 +73,9 @@ document.addEventListener('keydown', function (e) {
   }
   if (e.key.toLowerCase() === 'v') {
     obs('CONTROL').notify('disable-video')
+  }
+  if (e.key.toLowerCase() === 'i') {
+    obs('CONTROL').notify('toggle-pt-subtitle')
   }
 })
 
