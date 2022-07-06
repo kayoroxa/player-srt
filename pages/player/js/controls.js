@@ -77,6 +77,12 @@ document.addEventListener('keydown', function (e) {
   if (e.key.toLowerCase() === 'i') {
     obs('CONTROL').notify('toggle-pt-subtitle')
   }
+  if (e.key.toLowerCase() === 'insert') {
+    obs('CONTROL').notify('check-point-set')
+  }
+  if (e.key.toLowerCase() === 'home') {
+    obs('CONTROL').notify('check-point-back')
+  }
 })
 
 obs('CONTROL').on('shortcut-toggle', value => {
