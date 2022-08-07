@@ -5,7 +5,7 @@ const fs = require('fs')
 const subtitle = require('../../Subtitle')
 
 function finderSrtAllMovies({ query, exactly, sameMovie }) {
-  const pathsMovies = [configPlayer.folderMovies, configPlayer.folderMovies2]
+  const pathsMovies = configPlayer.foldersMovies
 
   let find = []
 
