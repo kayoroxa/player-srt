@@ -84,7 +84,7 @@ function prevSubtitle() {
 function currentSubtitle() {
   // debugger
   const last = subtitle.getLastSub().en.startTime
-  if (video.currentTime < last + 0.5) {
+  if (video.currentTime < last + 0.2) {
     const { en } = subtitle.changeIndexSub(index => index - 1)
     video.currentTime = en.startTime + 0.01
   } else {
@@ -99,8 +99,21 @@ video.addEventListener('timeupdate', () => {
   }
 })
 
-obs('CONTROL').on('scene-next', nextScene)
-obs('CONTROL').on('scene-prev', prevScene)
-obs('CONTROL').on('subtitle-next', nextSubtitle)
-obs('CONTROL').on('subtitle-prev', prevSubtitle)
-obs('CONTROL').on('subtitle-current', currentSubtitle)
+let interval = null
+
+function preventControl(callback) {
+  if (interval) clearInterval(interval)
+  document.querySelector('video').controls = false
+
+  interval = setInterval(() => {
+    document.querySelector('video').controls = true
+  }, 2000)
+
+  callback()
+}
+
+obs('CONTROL').on('scene-next', () => preventControl(nextScene))
+obs('CONTROL').on('scene-prev', () => preventControl(prevScene))
+obs('CONTROL').on('subtitle-next', () => preventControl(nextSubtitle))
+obs('CONTROL').on('subtitle-prev', () => preventControl(prevSubtitle))
+obs('CONTROL').on('subtitle-current', () => preventControl(currentSubtitle))
