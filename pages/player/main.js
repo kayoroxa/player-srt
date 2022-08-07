@@ -20,3 +20,4 @@ require('./js/lyrics')
 // require('./player.js')
 
 require('./js/handleVideoConfig')
+require('./onlyMoviePlayer')

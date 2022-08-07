@@ -14,15 +14,12 @@ function repeatSubtitle() {
 }
 
 function videoPlayToggle(e) {
-  console.log('oi')
   e.preventDefault()
   if (video.paused) {
     video.classList.remove('paused')
-    // document.querySelector('.subtitles').classList.remove('hide')
     video.play()
   } else {
     if (!video.controls) {
-      // document.querySelector('.subtitles').classList.add('hide')
       video.classList.add('paused')
     }
     const timer = setInterval(() => {
@@ -91,12 +88,3 @@ video.addEventListener('play', () => {
 if (!subtitlePt) {
   document.querySelector('#pt').style.display = 'none'
 }
-
-// function changeVideoTime(time, newIndexSub) {
-//   lastRepeatIndexSub = newIndexSub
-//   console.log('changeVideoTime', lastRepeatIndexSub)
-//   debugger
-//   video.currentTime = time
-//   // setTimeout(() => {
-//   // }, 500)
-// }

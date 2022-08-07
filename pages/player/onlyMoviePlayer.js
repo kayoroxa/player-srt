@@ -9,17 +9,18 @@ const subPt = document.querySelector('p.pt')
 const convertTimeStr = require('../../utils/convertHHMMSS')
 const obs = require('../../utils/observer')
 const subtitle = require('./Subtitle')
+let lastSubtitleEn = 0
 
 obs('subtitle').on('change', ({ subEn, subPt }) => {
   // console.log(subEn)
-  subtitlesDataEn = subEn
+  subtitle.data.en = subEn
   // subtitle.changeSrt
-  if (subPt) subtitlesDataPt = subPt
-  else subtitlesDataPt = []
+  if (subPt) subtitle.data.pt = subPt
+  else subtitle.data.pt = []
 })
 
 function getIndexSub(currentTimeMs) {
-  return subtitlesDataEn.reduce((acc, sub, i) => {
+  return subtitle.data.en.reduce((acc, sub, i) => {
     if (sub.startTime <= currentTimeMs && sub.endTime >= currentTimeMs) {
       return i
     } else if (sub.startTime <= currentTimeMs) return i + 1
@@ -28,11 +29,11 @@ function getIndexSub(currentTimeMs) {
 }
 
 function handleSubtitleShow(event) {
-  if (!subtitlesDataEn || subtitlesDataEn.length < 2)
+  if (!subtitle.data.en || subtitle.data.en.length < 2)
     return (subEn.textContent = 'sem srt')
 
   const currentTimeMs = event.target.currentTime
-  if (!subtitlesDataEn?.find) {
+  if (!subtitle.data.en?.find) {
     debugger
   }
 
@@ -48,11 +49,11 @@ function handleSubtitleShow(event) {
   // debugger
 
   //get index of subtitle more closer to current time
-  const oldIndexSub = indexSub
+  const oldIndexSub = subtitle.getIndexSub()
 
   indexSub = getIndexSub(currentTimeMs)
   if (oldIndexSub !== indexSub) {
-    // console.log('oiii')
+    // console.log('oiii')'
     obs('subtitle').notify('sentence-sub-end')
   }
 
@@ -120,4 +121,5 @@ function onlyMoviePlayer() {
   video.addEventListener('timeupdate', handleSubtitleShow)
 }
 
-module.exports = onlyMoviePlayer
+onlyMoviePlayer()
+// module.exports = onlyMoviePlayer

@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+/* eslint-disable no-debugger */
 const parser = require('subtitles-parser')
 const fs = require('fs')
 const obs = require('../../utils/observer')
@@ -30,7 +32,10 @@ function Subtitle() {
       filterExt: 'srt',
     })[0]
 
-    if (!pathSrt) throw new Error('pathSrt not find')
+    if (!pathSrt) {
+      throw new Error('pathSrt not find')
+      debugger
+    }
 
     subData[obj?.lag] = readSrt(pathSrt)
     infoPath[obj?.lag] = pathSrt
@@ -113,7 +118,6 @@ function Subtitle() {
   }
 
   function getIndexSub() {
-    console.log('getIndexSub', othersInfo.indexSentenceSub)
     return othersInfo.indexSentenceSub
   }
   changeSrt(configPlayer.path)
@@ -124,6 +128,7 @@ function Subtitle() {
     othersInfo,
     writeSrt,
     subData,
+    data: subData,
     changeIndexSub,
     getLastSub,
     getIndexSub,
