@@ -33,8 +33,7 @@ function Subtitle() {
     })[0]
 
     if (!pathSrt) {
-      throw new Error('pathSrt not find')
-      debugger
+      throw new Error(`pathSrt not find: ${folderPath}`)
     }
 
     subData[obj?.lag] = readSrt(pathSrt)

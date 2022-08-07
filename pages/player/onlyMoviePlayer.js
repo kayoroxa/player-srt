@@ -3,13 +3,13 @@ const pathJoin = require('path').join
 const config = require('../../config-player')
 const pathMovie = config.path
 const { textToInner } = require('../../utils/text-funcs')
-const readSrt = require('../../utils/readSrt')
 const subEn = document.querySelector('p.en')
 const subPt = document.querySelector('p.pt')
 const convertTimeStr = require('../../utils/convertHHMMSS')
 const obs = require('../../utils/observer')
 const subtitle = require('./Subtitle')
 let lastSubtitleEn = 0
+let indexSub = 0
 
 obs('subtitle').on('change', ({ subEn, subPt }) => {
   // console.log(subEn)
@@ -34,7 +34,7 @@ function handleSubtitleShow(event) {
 
   const currentTimeMs = event.target.currentTime
   if (!subtitle.data.en?.find) {
-    debugger
+    throw new Error('subtitle.data.en is not an array')
   }
 
   const currentSubtitleEn = subtitle.subData.en?.find(sub => {
@@ -58,8 +58,6 @@ function handleSubtitleShow(event) {
   }
 
   subtitle.changeIndexSub(indexSub)
-
-  lastIndex = indexSub
 
   // console.log({ currentSubtitle, currentTimeMs })
   if (currentSubtitleEn) {
