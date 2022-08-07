@@ -15,6 +15,13 @@ app.on('ready', () => {
   })
   mainWindow.maximize()
   mainWindow.loadURL(`file://${__dirname}/pages/player/player.html`)
+  mainWindow.on('close', ev => {
+    ev.sender.hide()
+    ev.preventDefault() // prevent quit process
+    mainWindow.close()
+    mainWindow.removeAllListeners('close')
+    mainWindow = null
+  })
 })
 //♪
 // /#
