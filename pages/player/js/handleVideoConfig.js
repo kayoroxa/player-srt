@@ -1,32 +1,20 @@
-const { subtitlePt = true } = require('../../config-player')
+const { subtitlePt = true } = require('../../../config-player')
 const video = document.querySelector('video')
-// const convertTimeStr = require('../../utils/convertHHMMSS')
-//on key down change video current time
 
-const convertTimeStr = require('../../utils/convertHHMMSS')
-// const obs = require('../../utils/observer')
-
-// video = document.querySelector('video')
-
-let lastRepeatIndexSub
-
-let shortCutActive = true
-
-obs('command').on('toggle', isActive => {
-  shortCutActive = isActive
-})
-// let forceStopTeach = true
+const obs = require('../../../utils/observer')
+const subtitle = require('../Subtitle')
 
 function repeatSubtitle() {
   obs('command').notify('keyDown', () => {
     obs('repetition').notify('toggle', {
-      start: subtitlesDataEn[indexSub].startTime,
-      end: subtitlesDataEn[indexSub].endTime,
+      start: subtitle.getLastSub.start,
+      end: subtitle.getLastSub.end,
     })
   })
 }
 
 function videoPlayToggle(e) {
+  console.log('oi')
   e.preventDefault()
   if (video.paused) {
     video.classList.remove('paused')

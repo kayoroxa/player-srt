@@ -18,3 +18,5 @@ require('./js/checkPoint')
 // require('./js/clips')
 require('./js/lyrics')
 // require('./player.js')
+
+require('./js/handleVideoConfig')
