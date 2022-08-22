@@ -86,6 +86,77 @@ function Subtitle() {
     })
   }
 
+  function changeTimeShift(shiftTime, side = 'left') {
+    const mySide = side === 'left' ? 'startTime' : 'endTime'
+
+    subData.en[lastIndex][mySide] += shiftTime
+    subData.pt[lastIndex][mySide] += shiftTime
+
+    if (
+      subData.en[lastIndex - 1]['endTime'] >= subData.en[lastIndex]['startTime']
+    ) {
+      subData.en[lastIndex - 1]['endTime'] -= 10
+
+      subData.pt[lastIndex - 1]['endTime'] -= 10
+    }
+
+    const video = document.querySelector('video')
+
+    video.currentTime =
+      subData.en[lastIndex][mySide] - (side === 'right' ? 0.4 : 0)
+
+    // if (side === 'right') {
+    //   const listener = () => {
+    //     if (video.currentTime > )
+    //   }
+    //   video.addEventListener('timeupdate', listener)
+
+    // }
+
+    video.play()
+
+    // writeSrt(({ prev, index }) => {
+    //   return prev.map((item, i) => {
+    //     if (i === index) {
+    //       return {
+    //         ...item,
+    //         startTime: item.startTime + timeShift,
+    //         endTime: item.endTime + timeShift,
+    //       }
+    //     }
+    //     return item
+    //   })
+    // }, 'en')
+
+    // writeSrt(({ prev, index }) => {
+    //   return prev.map((item, i) => {
+    //     if (i === index) {
+    //       return {
+    //         ...item,
+    //         startTime: item.startTime + timeShift,
+    //         endTime: item.endTime + timeShift,
+    //       }
+    //     }
+    //     return item
+    //   })
+    // }, 'pt')
+  }
+
+  function allShift(time) {
+    debugger
+    subData.en = subData.en.map((s, i) => ({
+      ...s,
+      startTime: subData.en[i] + time,
+      endTime: subData.en[i] - time,
+    }))
+
+    subData.pt = subData.pt.map((s, i) => ({
+      ...s,
+      startTime: subData.pt[i] + time,
+      endTime: subData.en[i] - time,
+    }))
+  }
+
   function changeIndexSub(indexOrCallBack, notify) {
     let newIndex
     if (typeof indexOrCallBack === 'function') {
@@ -131,6 +202,8 @@ function Subtitle() {
     changeIndexSub,
     getLastSub,
     getIndexSub,
+    changeTimeShift,
+    allShift,
   }
 }
 
