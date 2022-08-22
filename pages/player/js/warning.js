@@ -3,7 +3,9 @@ const obs = require('../../../utils/observer')
 const warningElement = document.getElementById('warning')
 let myTimeout
 
-obs('warning').on('show', data => {
+let active = true
+
+function show(data) {
   clearTimeout(myTimeout)
   const title = data?.title ? data?.title : ''
   const message = data?.message ? data?.message : ''
@@ -19,4 +21,17 @@ obs('warning').on('show', data => {
       warningElement.classList.remove('show')
     }, 300)
   }, 3000)
+}
+
+obs('CONTROL').on('toggle-warning', () => {
+  active = !active
+  show({
+    title: 'Warning' + (active ? '✅' : '⛔'),
+    message: 'Is' + (active ? '' : ' not') + ' active',
+  })
+})
+
+obs('warning').on('show', data => {
+  if (!active) return
+  show(data)
 })
