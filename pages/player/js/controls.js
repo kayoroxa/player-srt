@@ -75,13 +75,40 @@ document.addEventListener('keydown', function (e) {
     obs('CONTROL').notify('disable-video')
   }
   if (e.key.toLowerCase() === 'i') {
-    obs('CONTROL').notify('toggle-pt-subtitle')
+    obs('CONTROL').notify('toggle-pt-en-subtitle')
+  }
+  if (e.key.toLowerCase() === 'k') {
+    obs('CONTROL').notify('put-pt-en-subtitle')
   }
   if (e.key.toLowerCase() === 'insert') {
     obs('CONTROL').notify('check-point-set')
   }
   if (e.key.toLowerCase() === 'home') {
     obs('CONTROL').notify('check-point-back')
+  }
+  if (e.key.toLowerCase() === '/') {
+    obs('CONTROL').notify('toggle-warning')
+  }
+
+  if (e.key.toLowerCase() === '7') {
+    obs('SHIFT-SRT').notify('left-decrease')
+  }
+  if (e.key.toLowerCase() === '8') {
+    obs('SHIFT-SRT').notify('left-increase')
+  }
+  if (e.key.toLowerCase() === '4') {
+    obs('SHIFT-SRT').notify('right-decrease')
+  }
+  if (e.key.toLowerCase() === '5') {
+    obs('SHIFT-SRT').notify('right-increase')
+  }
+
+  if (e.key.toLowerCase() === '+') {
+    obs('SHIFT-SRT').notify('increase')
+  }
+
+  if (e.key.toLowerCase() === '-') {
+    obs('SHIFT-SRT').notify('decrease')
   }
 })
 
