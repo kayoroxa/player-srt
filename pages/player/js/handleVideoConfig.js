@@ -5,12 +5,9 @@ const obs = require('../../../utils/observer')
 const subtitle = require('../Subtitle')
 
 function repeatSubtitle() {
-  obs('command').notify('keyDown', () => {
-    obs('repetition').notify('toggle', {
-      start: subtitle.getLastSub.start,
-      end: subtitle.getLastSub.end,
-    })
-  })
+  // obs('command').notify('keyDown', () => {
+  obs('repetition').notify('toggle')
+  // })
 }
 
 function videoPlayToggle(e) {
