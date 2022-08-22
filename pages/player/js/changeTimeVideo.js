@@ -99,15 +99,15 @@ video.addEventListener('timeupdate', () => {
   }
 })
 
-let interval = null
+// let interval = null
 
 function preventControl(callback) {
-  if (interval) clearInterval(interval)
-  document.querySelector('video').controls = false
+  // if (interval) clearInterval(interval)
+  // document.querySelector('video').controls = false
 
-  interval = setInterval(() => {
-    document.querySelector('video').controls = true
-  }, 2000)
+  // interval = setInterval(() => {
+  //   document.querySelector('video').controls = true
+  // }, 2000)
 
   callback()
 }
