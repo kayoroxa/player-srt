@@ -115,12 +115,15 @@ function Subtitle() {
 
     video.play()
 
+    writeSrt(() => subData.en, 'en')
+    writeSrt(() => subData.pt, 'pt')
+
     // writeSrt(({ prev, index }) => {
     //   return prev.map((item, i) => {
-    //     if (i === index) {
+    //     if (i === lastIndex) {
     //       return {
     //         ...item,
-    //         startTime: item.startTime + timeShift,
+    //         startTime: subData.en[lastIndex - 1],
     //         endTime: item.endTime + timeShift,
     //       }
     //     }
@@ -130,7 +133,7 @@ function Subtitle() {
 
     // writeSrt(({ prev, index }) => {
     //   return prev.map((item, i) => {
-    //     if (i === index) {
+    //     if (i === lastIndex) {
     //       return {
     //         ...item,
     //         startTime: item.startTime + timeShift,
