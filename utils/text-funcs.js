@@ -2,8 +2,8 @@
 const { teaches } = require('../config-player')
 const obs = require('./observer')
 const colors = require('../config-colors')
+const keysToSpanStringColors = require('./keyToSpan')
 
-const showColors = true
 const isExemple = false
 
 let joinTeaches = teaches
@@ -103,9 +103,7 @@ function genericsColors(text) {
 }
 
 function innerTxtSplittedByKeys(text) {
-  return text
-    .replace(/\{.*?\}/g, '<span class="teach">$&</span>')
-    .replace(/[{}]/g, '')
+  return keysToSpanStringColors(text).replace(/[{}]/g, '')
 }
 
 function textToInner(text, op) {
@@ -115,7 +113,8 @@ function textToInner(text, op) {
     text = text.replace(/\n/g, ' ')
   }
   if (op?.highLight !== false) text = colorTeach(text, { pt: op?.portuguese })
-  if (op?.portuguese === true) text = innerTxtSplittedByKeys(text)
+  // if (op?.portuguese === true)
+  text = innerTxtSplittedByKeys(text)
   return text
 }
 
