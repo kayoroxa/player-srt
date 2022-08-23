@@ -3,8 +3,6 @@ const subtitle = require('../Subtitle')
 
 // esquerda -
 
-const video = document.querySelector('video')
-
 obs('SHIFT-SRT').on('left-decrease', () => {
   subtitle.changeTimeShift(-0.06, 'left')
 })
