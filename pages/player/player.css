@@ -8,6 +8,11 @@ body {
   background-color: #000000;
 }
 
+*::selection {
+  /* background: #000000; */
+  color: #03cf92;
+}
+
 #warning {
   position: absolute;
   top: 20px;
@@ -110,6 +115,7 @@ video {
   opacity: 0;
 }
 
+
 p.en {
   font-size: 3.4vw;
   font-weight: bold;
@@ -119,6 +125,13 @@ p.pt {
   font-size: 2.8vw;
   color: rgb(199, 199, 199);
 }
+
+.subtitles p.only {
+  font-size: 3.4vw;
+  font-weight: bold;
+  color: white;
+}
+
 .time {
   position: absolute;
   z-index: 100;
@@ -144,4 +157,15 @@ p.pt {
   );
   pointer-events: none;
   z-index: 1;
+  transition: opacity 2s;
+}
+
+.browser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* width: 50px; */
+  /* height: 50px; */
+  z-index: 3;
+  background-color: #000000;
 }
