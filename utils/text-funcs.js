@@ -127,6 +127,7 @@ function sanitizer(text) {
     .replace(/\s\s+/g, ' ')
     .replace(/^.*?:/g, '')
     .replace(/\,(?=\S)/gim, ', ')
+    .replace(/♪/g, '')
     .trim()
 }
 

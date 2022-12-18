@@ -95,9 +95,11 @@ function Subtitle() {
     if (
       subData.en[lastIndex - 1]['endTime'] >= subData.en[lastIndex]['startTime']
     ) {
-      subData.en[lastIndex - 1]['endTime'] -= 10
+      subData.en[lastIndex - 1]['endTime'] =
+        subData.en[lastIndex]['startTime'] - 0.4
 
-      subData.pt[lastIndex - 1]['endTime'] -= 10
+      subData.pt[lastIndex - 1]['endTime'] =
+        subData.en[lastIndex]['startTime'] - 0.4
     }
 
     const video = document.querySelector('video')

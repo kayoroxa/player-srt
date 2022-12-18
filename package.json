@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "electron .",
     "erros": "eslint \"**/*.js\" --ignore-pattern node_modules/",
-    "exe": "electron-packager . --overwrite --platform=win64 "
+    "exe": "electron-packager . --overwrite --platform=win32"
   },
   "dependencies": {
     "@electron/remote": "^2.0.8",

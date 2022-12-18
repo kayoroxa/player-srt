@@ -65,4 +65,5 @@ let toggleVideo = true
 obs('CONTROL').on('disable-video', () => {
   toggleVideo = !toggleVideo
   document.querySelector('video').style.opacity = toggleVideo ? 1 : 0
+  document.querySelector('.video-gradient').style.opacity = toggleVideo ? 1 : 0
 })

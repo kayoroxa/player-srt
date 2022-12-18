@@ -4,8 +4,14 @@ const subtitle = require('../Subtitle')
 let infos = {}
 
 function showInfo() {
-  console.log('showInfo')
+  const velocity = () => {
+    const sub = subtitle.getLastSub().en
+    const duration = sub.endTime - sub.startTime
+    return Math.round(sub.text.split(' ').length / duration)
+  }
+
   infos = {
+    wordsPerSec: velocity(),
     wordsUniq: new Set(
       subtitle.subData.en
         .map(sub => sub.text)

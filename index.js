@@ -11,10 +11,15 @@ app.on('ready', () => {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
+      webSecurity: false,
     },
   })
   mainWindow.maximize()
   mainWindow.loadURL(`file://${__dirname}/pages/player/player.html`)
+  // mainWindow.loadURL(`file://${__dirname}/pages/library/index.html`)
+
+  // setInterval(() => {
+  // }, 6000)
   mainWindow.on('close', ev => {
     ev.sender.hide()
     ev.preventDefault() // prevent quit process

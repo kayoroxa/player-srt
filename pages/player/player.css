@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #000000;
+  background-color: #021ff4;
 }
 
 *::selection {
@@ -91,9 +91,9 @@ video {
 }
 
 .subtitles.center {
-  position: absolute;
-  bottom: 300px;
-  margin: auto;
+  /* position: absolute; */
+  /* bottom: 300px; */
+  /* margin: auto; */
 }
 
 .subtitles > * {

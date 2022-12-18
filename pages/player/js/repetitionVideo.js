@@ -26,11 +26,12 @@ function LoopVideo() {
   const video = document.querySelector('video')
 
   const handle = (start, end) => {
+    console.log({ end })
     if (!repeating) {
       video.removeEventListener('timeupdate', handle)
       return
     }
-    if (video.currentTime >= end) {
+    if (video.currentTime >= end - 0.05) {
       video.currentTime = start
       const { startTime, endTime } = subtitle.getLastSub().en
       start = startTime
