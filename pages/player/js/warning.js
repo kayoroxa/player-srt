@@ -15,12 +15,14 @@ function show(data) {
   warningElement.classList.add('show')
   warningElement.style.opacity = 1
 
-  myTimeout = setTimeout(() => {
-    warningElement.style.opacity = 0
-    setTimeout(() => {
-      warningElement.classList.remove('show')
-    }, 300)
-  }, 3000)
+  if (data.duration !== true) {
+    myTimeout = setTimeout(() => {
+      warningElement.style.opacity = 0
+      setTimeout(() => {
+        warningElement.classList.remove('show')
+      }, 300)
+    }, data.duration || 3000)
+  }
 }
 
 obs('CONTROL').on('toggle-warning', () => {
