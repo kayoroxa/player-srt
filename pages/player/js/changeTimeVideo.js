@@ -7,7 +7,7 @@ const video = document.querySelector('video')
 let indexTime = 0
 let canStop = true
 
-video.currentTime = convertTimeStr(times[indexTime][0])
+video.currentTime = times[indexTime] ? convertTimeStr(times[indexTime][0]) : 0
 
 function nextScene() {
   if (indexTime < times.length - 1) {
