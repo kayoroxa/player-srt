@@ -14,7 +14,7 @@ function findFile(fileName) {
 }
 
 module.exports = {
-  foldersMovies,
+  foldersMovies: foldersMovies.filter(dir => fs.existsSync(dir)),
   times: [
     //------ Toy Story ------ //
     // ['0:4:7', '0:4:34'],
