@@ -14,7 +14,7 @@ function findFile(fileName) {
 }
 
 module.exports = {
-  folderMovies: 'F:/movies',
+  foldersMovies,
   times: [
     //------ Toy Story ------ //
     // ['0:4:7', '0:4:34'],
