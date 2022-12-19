@@ -10,7 +10,7 @@ module.exports = {
     // ['0:4:7', '0:4:34'],
     // ['0:1:33', '0:2:1'],
   ],
-  path: findFile('spider'), // ele vai procurar qual filme tem includes spider
+  path: findFile('spider', foldersMovies), // ele vai procurar qual filme tem includes spider
   teaches: [
     //------ Toy Story ------ //
     // 'gangway',
