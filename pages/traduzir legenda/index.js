@@ -3,8 +3,9 @@ const fs = require('fs')
 const pathJoin = require('path').join
 const readlineSync = require('readline-sync')
 const parser = require('subtitles-parser')
+const configPlayer = require('../../config-player')
 
-const movieFolder = 'f:/movies'
+const movieFolder = configPlayer.foldersMovies[0]
 
 const folders = fs.readdirSync(movieFolder)
 
