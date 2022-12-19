@@ -1,17 +1,7 @@
 const fs = require('fs')
+const findFile = require('./utils/findFile')
 
 const foldersMovies = ['F:/movies', 'D:/movie', 'E:/movies'] // pick your all directories main of your movies
-
-function findFile(fileName) {
-  for (let mainFolder of foldersMovies) {
-    const file = fs
-      .readdirSync(mainFolder)
-      .find(file => file.toLowerCase().includes(fileName))
-
-    if (file) return mainFolder + '/' + file
-  }
-  return null
-}
 
 module.exports = {
   foldersMovies: foldersMovies.filter(dir => fs.existsSync(dir)),
