@@ -835,5 +835,86 @@
         "raw": "Você sabe o que, eu só\nmal posso esperar para eles encontrarem"
       }
     }
+  },
+  {
+    "infoPath": {
+      "folder": "E:/movies/Dumb and Dumber (1994) [1080p]",
+      "en": "E:/movies/Dumb and Dumber (1994) [1080p]/Dumb.And.Dumber.1994.1080p.BluRay.x264.YIFY.srt",
+      "pt": "E:/movies/Dumb and Dumber (1994) [1080p]/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 493,
+        "en": 493
+      },
+      "en": {
+        "id": "560",
+        "startTime": 1827.925,
+        "endTime": 1829.893,
+        "text": "I've been giving this\na lot of thought.",
+        "raw": "I've been giving this\na lot of thought."
+      },
+      "pt": {
+        "id": "560",
+        "startTime": 1827.925,
+        "endTime": 1829.893,
+        "text": "eu tenho dado isso\nmuito pensamento.",
+        "raw": "eu tenho dado isso\nmuito pensamento."
+      }
+    }
+  },
+  {
+    "infoPath": {
+      "folder": "D:/movie/Soul (2020) [1080p] [BluRay] [5.1] [YTS.MX]",
+      "en": "D:/movie/Soul (2020) [1080p] [BluRay] [5.1] [YTS.MX]/Soul.2020.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt",
+      "pt": "D:/movie/Soul (2020) [1080p] [BluRay] [5.1] [YTS.MX]/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 1284,
+        "en": 1286
+      },
+      "en": {
+        "id": "1457",
+        "startTime": 3860.527,
+        "endTime": 3863.155,
+        "text": "Ray would have been so proud of you, baby.",
+        "raw": "Ray would have been so proud of you, baby."
+      },
+      "pt": {
+        "id": "1457",
+        "startTime": 3860.527,
+        "endTime": 3863.155,
+        "text": "Ray teria ficado tão orgulhoso de você, querida.",
+        "raw": "Ray teria ficado tão orgulhoso de você, querida."
+      }
+    }
+  },
+  {
+    "infoPath": {
+      "folder": "D:/movie/Soul (2020) [1080p] [BluRay] [5.1] [YTS.MX]",
+      "en": "D:/movie/Soul (2020) [1080p] [BluRay] [5.1] [YTS.MX]/Soul.2020.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt",
+      "pt": "D:/movie/Soul (2020) [1080p] [BluRay] [5.1] [YTS.MX]/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 1321,
+        "en": 1323
+      },
+      "en": {
+        "id": "1501",
+        "startTime": 3969.052,
+        "endTime": 3971.471,
+        "text": "I bet you're ready to get off\nof this stinky rock, huh?",
+        "raw": "I bet you're ready to get off\nof this stinky rock, huh?"
+      },
+      "pt": {
+        "id": "1501",
+        "startTime": 3969.052,
+        "endTime": 3971.471,
+        "text": "Aposto que você está pronto para sair\ndesta rocha fedorenta, hein?",
+        "raw": "Aposto que você está pronto para sair\ndesta rocha fedorenta, hein?"
+      }
+    }
   }
 ]

@@ -27,25 +27,43 @@ function getMostFastSentences(subtitlesData) {
   return mostFastSentences
 }
 
+const stringSimilarity = require('string-similarity')
+
 function getMostConnected(subtitlesData) {
   const sentences = subtitlesData
     .map(sub => {
       const text = sub.text.split(/[\s|\n]/g)
-      const { steps } = generateConnected(sub.text)
+      const sentence = sub.text.replace(/\{|\}/g, '')
+      const { steps } = generateConnected(sentence)
+      const result = steps.slice(-1)[0]
 
-      return {
+      const _return = {
         text,
         startTime: sub.startTime,
         endTime: sub.endTime,
-        wordPerSecond: steps.length,
-        infos: JSON.stringify(steps.slice(-1)[0]),
+        wordPerSecond: false,
+        infos: JSON.stringify(result),
         durationClip: Math.round(sub.endTime - sub.startTime),
       }
+
+      if (result) {
+        const similarityPercent = stringSimilarity.compareTwoStrings(
+          sentence,
+          result
+        )
+        _return.wordPerSecond = similarityPercent
+      }
+      return _return
     })
-    .filter(sub => sub.text.length > 5 && !sub.text.includes('♪'))
+    .filter(
+      sub =>
+        sub.text.length > 10 &&
+        !sub.text.includes('♪') &&
+        sub.wordPerSecond !== false
+    )
 
   const mostFastSentences = sentences.sort((a, b) => {
-    return b.wordPerSecond - a.wordPerSecond
+    return a.wordPerSecond - b.wordPerSecond
   })
   return mostFastSentences
 }

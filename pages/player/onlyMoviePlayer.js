@@ -5,6 +5,7 @@ const pathMovie = config.path
 const { textToInner } = require('../../utils/text-funcs')
 const subEn = document.querySelector('p.en')
 const subPt = document.querySelector('p.pt')
+const ctsElem = document.querySelector('.cts')
 const convertTimeStr = require('../../utils/convertHHMMSS')
 const obs = require('../../utils/observer')
 const subtitle = require('./Subtitle')
