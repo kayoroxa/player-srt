@@ -51,7 +51,9 @@ function getMostConnected(subtitlesData) {
           sentence,
           result
         )
-        _return.wordPerSecond = similarityPercent
+
+        // _return.wordPerSecond = similarityPercent
+        _return.wordPerSecond = result.split('').filter(l => l === '-').length
       }
       return _return
     })
@@ -65,7 +67,7 @@ function getMostConnected(subtitlesData) {
   const mostFastSentences = sentences.sort((a, b) => {
     return a.wordPerSecond - b.wordPerSecond
   })
-  return mostFastSentences
+  return mostFastSentences.reverse()
 }
 
 // const mostFaster = getMostFastSentences(subtitle.subData.en)

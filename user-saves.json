@@ -916,5 +916,113 @@
         "raw": "Aposto que você está pronto para sair\ndesta rocha fedorenta, hein?"
       }
     }
+  },
+  {
+    "infoPath": {
+      "folder": "F:\\movies\\Monsters vs Aliens (2009)",
+      "en": "F:\\movies\\Monsters vs Aliens (2009)/Monsters.Vs.Aliens.2009.720p.BrRip.x264.YIFY.srt",
+      "pt": "F:\\movies\\Monsters vs Aliens (2009)/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 478,
+        "en": 484
+      },
+      "en": {
+        "id": "536",
+        "startTime": 1948.9,
+        "endTime": 1951.66,
+        "text": "Now go over there and see\nif you can find any stairs.",
+        "raw": "Now go over there and see\nif you can find any stairs."
+      },
+      "pt": {
+        "id": "536",
+        "startTime": 1948.9,
+        "endTime": 1951.66,
+        "text": "Agora vá lá e veja\nse você pode encontrar alguma escada.",
+        "raw": "Agora vá lá e veja\nse você pode encontrar alguma escada."
+      }
+    }
+  },
+  {
+    "infoPath": {
+      "folder": "F:\\movies\\Monsters vs Aliens (2009)",
+      "en": "F:\\movies\\Monsters vs Aliens (2009)/Monsters.Vs.Aliens.2009.720p.BrRip.x264.YIFY.srt",
+      "pt": "F:\\movies\\Monsters vs Aliens (2009)/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 678,
+        "en": 678
+      },
+      "en": {
+        "id": "679",
+        "startTime": 3127.958,
+        "endTime": 3130.62,
+        "text": "I swear they're popping up\nfaster than rabbits.",
+        "raw": "I swear they're popping up\nfaster than rabbits."
+      },
+      "pt": {
+        "id": "679",
+        "startTime": 3127.958,
+        "endTime": 3130.62,
+        "text": "Eu juro que eles estão aparecendo\nmais rápido que coelhos.",
+        "raw": "Eu juro que eles estão aparecendo\nmais rápido que coelhos."
+      }
+    }
+  },
+  {
+    "infoPath": {
+      "folder": "F:\\movies\\Monsters vs Aliens (2009)",
+      "en": "F:\\movies\\Monsters vs Aliens (2009)/Monsters.Vs.Aliens.2009.720p.BrRip.x264.YIFY.srt",
+      "pt": "F:\\movies\\Monsters vs Aliens (2009)/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 617,
+        "en": 617
+      },
+      "en": {
+        "id": "618",
+        "startTime": 3456.286,
+        "endTime": 3459.496,
+        "text": "Why did I ever think life with Derek\nwould be so great, anyway?",
+        "raw": "Why did I ever think life with Derek\nwould be so great, anyway?"
+      },
+      "pt": {
+        "id": "618",
+        "startTime": 3456.286,
+        "endTime": 3459.496,
+        "text": "Por que eu pensei que a vida com Derek\nseria tão boa, afinal?",
+        "raw": "Por que eu pensei que a vida com Derek\nseria tão boa, afinal?"
+      }
+    }
+  },
+  {
+    "infoPath": {
+      "folder": "F:\\movies\\Monsters vs Aliens (2009)",
+      "en": "F:\\movies\\Monsters vs Aliens (2009)/Monsters.Vs.Aliens.2009.720p.BrRip.x264.YIFY.srt",
+      "pt": "F:\\movies\\Monsters vs Aliens (2009)/portuguese.srt"
+    },
+    "sentenceSub": {
+      "subsIndex": {
+        "pt": 223,
+        "en": 223
+      },
+      "en": {
+        "id": "224",
+        "startTime": 1200.699,
+        "endTime": 1205.119,
+        "text": "Think of it as a hotel you never leave\nbecause it's locked from the outside!",
+        "raw": "Think of it as a hotel you never leave\nbecause it's locked from the outside!"
+      },
+      "pt": {
+        "id": "224",
+        "startTime": 1200.699,
+        "endTime": 1205.119,
+        "text": "Pense nele como um hotel do qual você nunca sai\nporque está trancado do lado de fora!",
+        "raw": "Pense nele como um hotel do qual você nunca sai\nporque está trancado do lado de fora!"
+      }
+    }
   }
 ]
