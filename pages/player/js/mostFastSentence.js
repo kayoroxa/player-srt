@@ -59,9 +59,8 @@ function getMostConnected(subtitlesData) {
     })
     .filter(
       sub =>
-        sub.text.length > 10 &&
-        !sub.text.includes('♪') &&
-        sub.wordPerSecond !== false
+        // sub.text.length > 10 &&
+        !sub.text.includes('♪') && sub.wordPerSecond !== false
     )
 
   const mostFastSentences = sentences.sort((a, b) => {
